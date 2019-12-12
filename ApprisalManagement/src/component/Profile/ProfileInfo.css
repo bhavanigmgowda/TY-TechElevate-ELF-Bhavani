@@ -1,0 +1,49 @@
+.profile{
+    width: 148px;
+    border-radius: 50%;
+    height: 102px;
+
+}
+.profileCard{
+    background-color: rgba(94, 138, 138, 0.288);
+    background-image: linear-gradient(to right, rgba(94, 138, 138, 0.288) , rgb(247, 247, 240));
+
+}
+
+.view {
+    height:100%;
+}
+
+.navbar-brand {
+    color:#fff !important;
+}
+
+.profile-photo {
+    width:48px;
+    height:auto;
+}
+
+.flex-menu {
+    display:flex;
+}
+
+.flex-menu li:not(:last-child) {
+    margin-right:40px;
+}
+
+.allCards{
+      box-shadow:10px 10px 5px grey;
+     margin-top: 12px 
+}
+
+.innerCard{
+    margin-top: 32px;
+    margin-bottom: 22px;
+}
+
+
+.hover:hover {
+
+    box-shadow:10px 10px 5px grey;
+    margin-top: 12px 
+}
