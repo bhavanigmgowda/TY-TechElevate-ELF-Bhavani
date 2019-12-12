@@ -6,46 +6,46 @@ import AppraisalGraph from './AppraisalGraph';
 import NavBarPage from '../NavBar/NavBarPage';
 
 const Profile = props => {
-	const [profile, setProfile]=useState();
-    return (
+	const [profile, setProfile] = useState();
+	return (
 
 
-		
-        <div style={{backgroundColor:"#F5F5F5"}}>
-							<NavBarPage/>
 
-            <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-9">
-					<div class="row">
-						<br/>
-						<div class="col-md-12" style={{    marginBottom: "20px"}}>
-							
-<ProfileInfo profileData={profile}/>					
-	</div>
+		<div style={{ backgroundColor: "#F5F5F5" }}>
+			<NavBarPage />
+
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="row">
+									<br />
+									<div class="col-md-12" style={{ marginBottom: "20px" }}>
+
+										<ProfileInfo profileData={profile} />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<AppraisalGraph />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<Team profileData={(data) => setProfile(data)} />
+								{console.log(Profile)}
+							</div>
+						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<AppraisalGraph  />
-											</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-                    <Team profileData={(data)=>setProfile(data)}/>
-					{console.log(Profile)}
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-        </div>
-    );
+	);
 };
 
 Profile.propTypes = {
-    
+
 };
 
 export default Profile;

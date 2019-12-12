@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ProfileInfo.css'
 import Chart from "react-apexcharts";
+import { Card } from 'react-bootstrap';
 const Team = props => {
 const a=[
     {
@@ -69,9 +70,9 @@ const a=[
 
         <div>
         <div>
-       <div class="card text-center allCards"  >
+       <Card class="text-center allCards"  >
 
-<div class="card-body ">
+<Card body>
    <h3>MY TEAM</h3> 
 <div >
 {a.map(item => {
@@ -87,9 +88,9 @@ return(
       </div>
 </div>)})}
   </div>
-</div>
+</Card>
 
-</div>
+</Card>
    </div>
    </div>
 

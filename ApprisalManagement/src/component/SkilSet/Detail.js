@@ -1,7 +1,12 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React, { Component } from 'react'
+import NavBar from '../../../NavBar/NavBar'
+import skillset from '../../../NavBar/SkillSet/Skillset'
+import Skillset from '../../../NavBar/SkillSet/Skillset';
 
-const ProfileInHome = () => {
+
+
+
+const Detail = props => {
     const data={ 
         "_id": "5df0c7d79b7424bb6a584f07",
         "index": 4,
@@ -17,12 +22,13 @@ const ProfileInHome = () => {
       }
     return (
         <div>
-            <Card>
-  <Card.Body>
+                  
+              	<NavBar/>
+                
 
-  <div class="d-flex flex-row border rounded  col-md-12 " >
+         <div class="d-flex flex-row border rounded hover col-md-12 " style={{    backgroundColor: "rgb(247, 247, 240)",cursor:"pointer"}}>
         <div style={{border:"none"}} >
-            <img src={data.picture} className="profile"/>
+            <img style={{marginTop: '16px'}} src={data.picture}className="profile"/>
         </div>
         <div className="innerCard">
                 <h6 >{data.name}</h6>
@@ -30,10 +36,12 @@ const ProfileInHome = () => {
 <h6 style={{color:"cornflowerblue"}}>{data.email}</h6>
       </div>
 </div>
-  </Card.Body>
-</Card>
-        </div>
-    );
+
+    <Skillset/>
+
+</div>);
 };
 
-export default ProfileInHome;
+
+export default Detail;
+
