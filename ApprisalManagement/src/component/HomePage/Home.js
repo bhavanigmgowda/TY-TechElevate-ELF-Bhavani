@@ -1,29 +1,22 @@
 import React from 'react';
+import ListOfOption from './ListOfOption';
+import NavBarPage from '../NavBar/NavBarPage';
+import ProfileInHome from './ProfileInHome';
 
 const Home = () => {
     return (
         <div>
-            <div class="container-fluid">
+            <NavBarPage/>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
+                    <ProfileInHome/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-                <Navbar bg="light" variant="light">
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
-    </Nav>
-    <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-primary">Search</Button>
-    </Form>
-  </Navbar>
+                    <ListOfOption/>
 				</div>
 			</div>
 			<div class="row">
@@ -32,7 +25,6 @@ const Home = () => {
 			</div>
 		</div>
 	</div>
-</div>
         </div>
     );
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ProfileInfo from './ProfileInfo';
 import Team from './Team';
 import AppraisalGraph from './AppraisalGraph';
-import NavBar from '../NavBar/NavBar';
+import NavBarPage from '../NavBar/NavBarPage';
 
 const Profile = props => {
 	const [profile, setProfile]=useState();
@@ -12,8 +12,9 @@ const Profile = props => {
 
 		
         <div style={{backgroundColor:"#F5F5F5"}}>
+							<NavBarPage/>
+
             <div class="container-fluid">
-				<NavBar/>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">

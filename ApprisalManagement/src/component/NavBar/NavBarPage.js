@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './NavBar.css'
+import { Nav, Navbar, NavbarBrand, NavDropdown, Form, FormControl, Button, Image} from 'react-bootstrap'
+import {Link} from 'react-router-dom';
 
-const NavBar = props => {
+
+const NavBarPage = props => {
     return (
         <nav class="navbar navbar-expand-md new-bg navbar-dark">
         <a class="navbar-brand new" href="#">
-          <span class="ty-logo">T</span>raining<span class="ty-logo">M</span>aintenance
+          <span class="ty-logo">A</span>ppraisal<span class="ty-logo">M</span>anagement
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
@@ -14,26 +17,19 @@ const NavBar = props => {
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link new-link" routerLink="/dashboard">Dashboard</a>
+              <Link class="nav-link new-link" to="/">Dashboard</Link>
             </li>
-            <li class="nav-item">
-              <a class="nav-link new-link" routerLink="/batch-details">Create Batch</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link new-link" routerLink="/batch-info">Batch Info</a>
-            </li>
+           
     
     </ul>
     </div>
     <li class="nav-item">
-              <h4 class="nav-link new-link" routerLink="/batch-info">My Profile</h4>
+              <Link class="nav-link new-link" to="/profile"><h4>My Profile</h4></Link>
             </li>
     </nav>
     );
 };
 
-NavBar.propTypes = {
-    
-};
 
-export default NavBar;
+
+export default NavBarPage;

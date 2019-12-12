@@ -1,0 +1,10 @@
+.colorText{
+    color: black !important;
+    font-style: bold;
+    font-size: 20px;
+}
+
+.colorText:hover {
+    color: mediumaquamarine !important;
+    text-decoration:underline !important;
+  }
