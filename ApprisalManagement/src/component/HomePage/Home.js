@@ -6,71 +6,89 @@ import FeedBackTable from '../FeedBack/FeedBackTable';
 import Goal from '../Goal/Goal';
 import Peer from '../Peer/Peer';
 import Skillset from '../SkilSet/SkilSet';
-import { Card, Navbar ,Nav} from 'react-bootstrap';
+import { Card, Navbar, Nav, Button } from 'react-bootstrap';
 import Feedback from 'react-bootstrap/Feedback';
 
 const Home = () => {
-const [skill,setSkill]=useState(false);
-const [peer,setPeer]=useState(false);
-const [goal,setGoal]=useState(false);
-const [feedBack,setFeedBack]=useState(false);
+    const [skill, setSkill] = useState(true);
+    const [peer, setPeer] = useState(false);
+    const [goal, setGoal] = useState(false);
+    const [feedBack, setFeedBack] = useState(false);
 
 
-useEffect(()=>{
-setGoal(false)
 
-},[skill])
-useEffect(()=>{
-    console.log("sdaaaaaaaaaaaa",skill)
-    console.log("sdaaaaaaaaaaaa",peer)
-    console.log("sdaaaaaaaaaaaa",goal)
-    console.log("sdaaaaaaaaaaaa",feedBack)
-    })
-    useEffect(()=>{
-        console.log("sdaaaaaaaaaaaa",skill)
-        console.log("sdaaaaaaaaaaaa",peer)
-        console.log("sdaaaaaaaaaaaa",goal)
-        console.log("sdaaaaaaaaaaaa",feedBack)
-        })
+   
+    const set = (data) => {
+        switch (data) {
+            case "skill":
+                setSkill(true);
+                setPeer(false);
+                setGoal(false);
+                setFeedBack(false);
 
+                break;
+            case "peer":
+                setSkill(false);
+                setPeer(true);
+                setGoal(false);
+                setFeedBack(false);
+                break;
+            case "goal":
+                setSkill(false);
+                setPeer(false);
+                setGoal(true);
+                setFeedBack(false);
+                break;
+            case "feedBack":
+                setSkill(false);
+                setPeer(false);
+                setGoal(false);
+                setFeedBack(true);
+                break;
+        }
+    }
 
     return (
         <div>
-            <NavBarPage/>
+            <NavBarPage />
             <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-12">
-                    <ProfileInHome/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-                <Card >
-<Navbar expand="lg" >
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto ">
-            <Nav.Link className="colorText" onClick={()=>setSkill(true)}>Skill Set </Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Nav.Link className="colorText" onClick={()=>setPeer(true)} href="#link">Peer </Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Nav.Link className="colorText" onClick={()=>setGoal(true)} href="#link">Goal</Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Nav.Link className="colorText" onClick={()=>setFeedBack(true)} href="#link">Feedback</Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </Nav>
-          
-        </Navbar.Collapse>
-      </Navbar>      </Card>				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-                {skill?<Skillset/>:null}
-                {peer?<Peer/>:null}
-                {goal?<Goal/>:null}
-                {feedBack?<Feedback/>:null}
-				</div>
-			</div>
-		</div>
-	</div>
-    </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ProfileInHome />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <Card >
+                                    <Navbar  >
+                                        <Navbar.Collapse id="basic-navbar-nav">
+                                            <Nav className="mr-auto ">
+                                                <Nav.Link className={skill?"colorHover":"colorText"}  onClick={() => set("skill")}>Skill Set </Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                 <Nav.Link className={peer?"colorHover":"colorText"}  onClick={() => set("peer")} href="#link">Peer </Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                 <Nav.Link className={goal?"colorHover":"colorText"}  onClick={() => set("goal")} href="#link">Goal</Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <Nav.Link className={feedBack?"colorHover":"colorText"}  onClick={() => set("feedBack")} href="#link">Feedback</Nav.Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <div >
+                                                <Button style={{backgroundColor:"mediumaquamarine" ,border:"none"}}  class="mr-auto"> Add Comment </Button>&nbsp;&nbsp;&nbsp;
+                                                </div>
+                                             </Nav>
+                                        </Navbar.Collapse>
+                                    </Navbar>
+                                </Card>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {skill ? <Skillset /> : null}
+                                {peer ? <Peer /> : null}
+                                {goal ? <Goal /> : null}
+                                {feedBack ? <FeedBackTable /> : null}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -1,3 +1,7 @@
+html{
+    font-family: 'Titillium Web', sans-serif;
+}
+
 .profile{
     width: 148px;
     border-radius: 50%;
@@ -5,8 +9,8 @@
 
 }
 .profileCard{
-    background-color: rgba(94, 138, 138, 0.288);
-    background-image: linear-gradient(to right, rgba(94, 138, 138, 0.288) , rgb(247, 247, 240));
+    background-color: rgba(94, 138, 138, 0.288) ;
+    background-image: linear-gradient(to right, rgba(247, 193, 174, 0.233) , rgb(247, 247, 240));
 
 }
 
@@ -32,7 +36,7 @@
 }
 
 .allCards{
-      box-shadow:10px 10px 5px grey;
+      box-shadow:5px 5px 5px grey;
      margin-top: 12px 
 }
 
@@ -46,5 +50,5 @@
 .hover:hover {
 
     box-shadow:10px 10px 5px grey;
-    margin-top: 12px 
+    margin-top: 5px 
 }

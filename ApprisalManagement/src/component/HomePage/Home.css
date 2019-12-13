@@ -5,9 +5,17 @@
 }
 
 .colorText:hover {
-    color: mediumaquamarine !important;
+    color: orangered !important;
     text-decoration:underline !important;
   }
+
+  .colorHover {
+    color: orangered !important;
+    text-decoration:underline !important;
+    font-style: bold;
+    font-size: 20px;
+  }
+
   .tooltip {
     position: relative;
     display: inline-block;

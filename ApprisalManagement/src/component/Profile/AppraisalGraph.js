@@ -20,7 +20,7 @@ class AppraisalGraph extends Component {
             },
             series: [
                 {
-                    name: "apprisal",
+                    name: "apprisal in %",
                     data: [5, 40, 45, 100, 49]
                 }
             ]
