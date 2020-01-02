@@ -91,7 +91,8 @@ class SearchNavabar extends Component {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="nav-link">
-                            <Link to="/CreateTask"><div className="w-100 mt-1" >
+                            <Link to="/CreateTask" style={{  textDecoration: "none"}}>
+                                <div className="w-100 mt-1" >
                                 
                                 <h5 style={{width:'141%' ,color: 'white',    marginRight: "69px"}}   >
                                     Create Task

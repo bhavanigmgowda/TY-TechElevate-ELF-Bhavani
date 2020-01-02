@@ -133,7 +133,7 @@ html,body{
     and (max-device-width: 2493px) 
     and (-webkit-min-device-pixel-ratio: 1) { 
       .cor{
-        margin-bottom: -10%;
+        margin-bottom: -8%;
         margin-right: 76%;
         position: relative;
         cursor: pointer;

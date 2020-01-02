@@ -32,25 +32,25 @@ export default class ConfirmPassword extends Component {
     NotifyPasswordChange = () => {
         if (! toast.isActive(this.toastId)) {
         this.toastId=	toast.success(<center>Password Changed Successfully</center>, {
-			position: "top-center", autoClose: 5000,});
+			position: "top-center", autoClose: false,});
     }
 }
     NotifyServerOffline = () => {
         if (! toast.isActive(this.toastId)) {
 		this.toastId=toast.error(<center>Server Not Responding</center>, {
-			position: "top-center", autoClose: 7000,});
+			position: "top-center", autoClose: false,});
     }
 }
     NotifyPasswordMismatch=()=>{
         if (! toast.isActive(this.toastId)) {
         this.toastId= toast.error(<center>Passwords Didn't Match Try Again...</center>, {
-			position: "top-center", autoClose: 7000,});
+			position: "top-center", autoClose: false,});
     }
 }
     NotifyPasswordExists=()=>{
         if (! toast.isActive(this.toastId)) {
         this.toastId= toast.warn(<center>This Password Already Exists Create Another</center>, {
-			position: "top-center", autoClose: 7000,});
+			position: "top-center", autoClose: false,});
     }
 }
     handleClick = () => this.setState(({ type }) => ({

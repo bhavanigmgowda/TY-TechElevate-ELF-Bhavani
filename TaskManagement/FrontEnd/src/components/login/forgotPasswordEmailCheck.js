@@ -225,13 +225,13 @@ export default class forgotPasswordEmailCheck extends Component {
 
             if (! toast.isActive(this.toastId)) {
                 this.toastId= toast.error(<center>Email Not Found</center>, {
-                position: "top-center", autoClose: 5000,preventDuplicate:true});
+                position: "top-center", autoClose: false,preventDuplicate:true});
             }
     }
     
 	NotifyServerOffline = () => {
 		toast.error(<center>Server Not Responding</center>, {
-			position: "top-center", autoClose: 5000,});
+			position: "top-center", autoClose: false,});
 	}
 
 

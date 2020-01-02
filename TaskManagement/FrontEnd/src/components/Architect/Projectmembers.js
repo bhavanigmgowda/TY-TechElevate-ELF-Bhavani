@@ -100,7 +100,12 @@ class Projectmembers extends React.Component {
         })
     }
 
-
+    homepage(e) {
+        e.preventDefault();
+        localStorage.removeItem('groupId');
+        localStorage.removeItem('projectName');
+        this.props.history.push('/homePage')
+    }
     handleClose() {
         this.setState({ show: !this.state.show })
     }
@@ -114,7 +119,7 @@ class Projectmembers extends React.Component {
                     <div className="col-md-12">
                         <div className="row">
                             <div className="col-md-10" >
-                          <div className="projectName"  style={{    margin: "2%"}} ><Link style={{color:'black'}} onClick={()=>{this.props.history.push('/homePage')}} className="dark">Project</Link>&nbsp;/&nbsp;
+                          <div className="projectName"  style={{    margin: "2%"}} ><Link style={{color:'black'}} onClick={(e)=>{this.homepage(e)}} className="dark">Project</Link>&nbsp;/&nbsp;
                                                             <Link style={{color:'black'}} to='/taskPage'>{localStorage.getItem("projectName")}</Link></div>
                 <Table striped  hover>
                     <thead>
