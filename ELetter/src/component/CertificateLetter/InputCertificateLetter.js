@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { MDBInput } from "mdbreact";
+import { MDBBtn } from "mdbreact";
+import Home from '../home';
 import { withRouter } from 'react-router-dom';
 import $ from 'jquery'
-import NavBar from '../Navbar/NavBar';
-import '../FormCss.css'
+import { MDBFormInline } from 'mdbreact';
 export class InputCertificateLetter extends Component {
 
     constructor(props) {
@@ -30,7 +32,7 @@ export class InputCertificateLetter extends Component {
         }
     }
 
-    componentDidMount() {
+    validate=()=> {
 
 
 
@@ -46,11 +48,6 @@ export class InputCertificateLetter extends Component {
 
 
         let that = this;
-        $(document).ready(function () {
-            $('#generate').click(function (e) {
-                debugger;
-
-
                 const monthNames = ["January", "February", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December"
                 ];
@@ -93,8 +90,6 @@ export class InputCertificateLetter extends Component {
                 else {
                     return false;
                 }
-            });
-        });
     }
 
 
@@ -119,7 +114,6 @@ export class InputCertificateLetter extends Component {
     pass = (event) => {
         event.preventDefault();
         console.log("data========", this.state)
-
         this.props.clicked(this.state)
         this.props.history.push('/certificateLetter')
 
@@ -167,11 +161,7 @@ export class InputCertificateLetter extends Component {
 
 
 
-        /* if(x === "on") {
-            setValue(!value)
-            console.log("check box value ", value  ,"And",!value);
-            props.showWatermark(value);
-        } */
+    
 
     }
 
@@ -226,189 +216,123 @@ export class InputCertificateLetter extends Component {
     render() {
         return (
             <div>
-
-                <NavBar buttonShow={false} />
-
-
+                <Home buttonShow={false} />
                 <div>
-        <div>
-          <label for="title" class="ty-font heading  col-lg-4 col-md-6 col-sm-6  col-6  offset-4 mt-5">Certificate Letter</label>
+                    <label for="title" class="ty-font heading col-lg-4 col-md-12 col-sm-12  col-12  offset-4 mt-5" style={{ left: "0px" }}>Certificate Letter</label>
 
-          <div class="card col-lg-4 col-md-6 col-sm-6  col-6  offset-4 mt-5">
-            <div class="card-body col-lg-10 col-md-10">
-              <form action="" method="post" onSubmit={this.submituserRegistrationForm} >
-                <div class="form-row mt-3">
-                  <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
-                    <input type="text" class="form-control  inputText" onChange={this.handleChange} id="client" name="client"
-                      required />
-                    <span class="floating-label">Client </span>
-                    <div class="ty-errmsg ">
-                      <div> {this.state.errors.client} </div>
+                    <div class="card container mt-5 mt-5" style={{width: "600px"}}>                        <div class="card-body col-lg-10 col-md-10">
+                            <form action="" method="post" onSubmit={this.pass} >
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" id="employeeName" class="form-control  inputText" onKeyPress={this.hideEmployeeName} onChange={(event) => {
+                                            this.setState({
+                                                employeeName: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Employee Name</span>
+
+                                        <div class="ty-errmsg ">
+                                            {this.state.showEmployeeName ? <div > Please fill out employee Name field * </div> : null}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" id="companyLocation" class="form-control  inputText" onKeyPress={this.hideCompanyLocation} onChange={(event) => {
+                                            this.setState({
+                                                companyLocation: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Company Location</span>
+                                        <div class="ty-errmsg ">
+                                            {this.state.showCompanyLocation ? <div>Please fill out company Location field * </div> : null}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-3">
+                                    <div className="col-3">
+                                        <div class="form-check" >
+                                            <input type="checkbox" value={this.state.checkedDegree} class="form-check-input" for="defaultCheck1" id="ssc" onChange={(event) => {
+                                                this.CheckValue(event)
+                                            }} />
+                                            <label style={{ whiteSpace: 'nowrap' }} htmlFor="ssc" class="form-check-label" for="defaultCheck1">ssc</label>
+                                        </div>
+
+                                    </div>
+                                    <div className="col-3">
+                                        <div class="form-check" >
+                                            <input type="checkbox" value={this.state.checkedDegree} class="form-check-input" for="defaultCheck1" id="puc" onChange={(event) => {
+                                                this.CheckValue(event)
+                                            }} />
+                                            <label style={{ whiteSpace: 'nowrap' }} htmlFor="puc" class="form-check-label" for="defaultCheck1">PUC</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="col-3">
+                                        <div class="form-check" >
+                                            <input type="checkbox" value={this.state.checkedDegree} class="form-check-input" for="defaultCheck1" id="degree" onChange={(event) => {
+                                                this.CheckValue(event)
+                                            }} />
+                                            <label style={{ whiteSpace: 'nowrap' }} htmlFor="degree" class="form-check-label" for="defaultCheck1">Degree</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-check" >
+                                        <div className="custom-control custom-checkbox custom-control-inline col-6">
+                                            <input type="checkbox" class="form-check-input" for="defaultCheck1" id="checkOthers" onClick={this.CheckValue} onChange={this.dataValue} />
+                                            <label style={{ whiteSpace: 'nowrap' }} htmlFor="checkOthers" class="form-check-label" for="defaultCheck1">Other</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-row mt-3">
+
+                                    {this.state.showOthers ?
+                                        <div class="col-md-12" >
+                                            <div class="form-group  ty-font user-input-wrp" style={{ width: "100%" }}> <br />
+                                                <input type="text" class="form-control  inputText" onKeyPress={this.hideEmployeeName} onChange={(event) => {
+                                                    this.setState({
+                                                        certificateType: event.target.value
+                                                    })
+                                                }} required />
+                                                <span class="floating-label">Other Certificate</span>
+
+                                            </div>
+                                        </div> : null}
+                                </div>
+                                <hr style={{ width: "111%" }} />
+                                <div class="form-row mt-3">
+                                    <div className="col-6">
+                                        <div class="form-check" >
+
+                                            <input type="checkbox" value={this.state.withHeader} className="form-check-input" onChange={(event) => {
+                                                this.onChangeHeader(event)
+                                            }} id="withLetterHead" for="defaultCheck1" />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withLetterHead">With Letter Head</label>
+                                        </div>
+
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-check">
+                                            <input type="checkbox" value={this.state.withWaterMark} className="form-check-input" id="withWatermark" onChange={(event) => {
+                                                this.onCheckHandler(event)
+                                            }} />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withWatermark">With WaterMark</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="float-right ty-create-button">
+                                    <button type="submit" class="btn btn-outline-primary ty-font" onClick={this.validate}>Create</button></div>
+                                <div class="float-right ty-reset-button">
+                                    <button type="reset" class="btn btn-outline-secondary ty-font">Reset</button></div>
+                            </form>
+
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-6 ty-font left user-input-wrp" id="billdesc"><br />
-                    <select class="custom-select inputText" id="test" name="technology" onChange={this.handleChange} required >
-                      <option selected disabled value="">Choose Priority</option>
-                      <option class="non" value="option1">Critical</option>
-                      <option class="non" value="option2">High</option>
-                      <option class="non" value="option1">Medium</option>
-                      <option class="editable" value="other">Low</option>
-                    </select>
-                    <input class="ty-editOption" style={{ display: "none" }} onChange={this.handleChange} placeholder="technology" name="technology" />
-                    <div class="ty-errmsg ">
-                      <div > {this.state.errors.technology} </div>
-                    </div>
-                  </div>
                 </div>
-                <div class="form-row mt-3">
-
-                  <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
-                    <select class="form-control  inputText" id="batchtype" name="batchtype"
-                      required onChange={this.handleChange} >
-                      <span class="floating-label">Client Name</span>
-
-                      <option value="" selected disabled hidden >Batchtype</option>
-                      <option>Paid</option>
-                      <option value="other">Free</option>
-                    </select>
-                    <div class="ty-errmsg ">
-                      <div >{this.state.errors.batchtype} </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6 ty-font left user-input-wrp"><br />
-                    <input type="number" class="form-control   inputText" id="province" name="fees"
-                      required onChange={this.handleChange} />
-                    <span class="floating-label">Fees</span>
-                    <div class="ty-errmsg ">
-                      <div > {this.state.errors.fees}</div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="form-row mt-3">
-
-                  <div class="form-group col-md-6 ty-font user-input-wrp"><br />
-                    <input type="number" class="form-control  inputText" onChange={this.handleChange} id="input" name="cost" required />
-                    <span class="floating-label">Cost per candidate</span>
-                    <div class="ty-errmsg ">
-                      <div > {this.state.errors.cost}</div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6 ty-font left user-input-wrp"><br />
-                    <input type="text" class="form-control  inputText" onChange={this.handleChange} id="input" name="location"
-                      required />
-                    <span class="floating-label">Location</span>
-                    <div class="ty-errmsg ">
-                      <div > {this.state.errors.location} </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row mt-3">
-
-                  <div class="form-group col-md-6 ty-font user-input-wrp"><br />
-
-                    <input class="form-control inputText" onChange={this.handleChange} id="input" name="startdate"
-                      required
-                      onFocus={(e) => e.target.type = 'date'}
-                      onBlur={(e) => e.target.type = "text"}
-                    />
-                    <span class="floating-label">Start Date</span>
-
-                    <div class="ty-errmsg ">
-                      <div> {this.state.errors.startdate} </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group col-md-6 ty-font left user-input-wrp"><br />
-
-                    <input class="form-control inputText" onChange={this.handleChange} id="input" name="enddate"
-                      required
-                      type='text'
-                      onFocus={(e) => e.target.type = 'date'}
-                      onBlur={(e) => e.target.type = "text"}
-                    />
-                    <span class="floating-label">End Date</span>
-                    <div class="ty-errmsg ">
-                      <div > {this.state.errors.enddate} </div>
-                    </div>
-                  </div>
-
-
-
-
-                </div>
-
-                <div class="form-row mt-3">
-
-                  <div class="form-group col-md-6 ty-font user-input-wrp"><br />
-                    <select class="form-control  inputText" id="input" name="traineetype" onChange={this.handleChange}
-                      required>
-                      <option value="" selected disabled hidden>Select Trainee type</option>
-                      <option>Freshers </option>
-                      <option>Lateral</option>
-                      <option>Mixed</option>
-                    </select>
-                    <div class="ty-errmsg ">
-                      <div > {this.state.errors.traineetype} </div>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6 ty-font left user-input-wrp"><br />
-                    <input type="text" class="form-control inputText " id="input" name="invoice" onChange={this.handleChange}
-                      required onfocus="this.type='date' " onblur="this.type='text'" />
-                                          <span class="floating-label">Invoice</span>
-
-                    <div class="ty-errmsg ">
-                      <div > {this.state.errors.invoice} </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row mt-3">
-                  <div class="form-group col-md-6 ty-font user-input-wrp"><br />
-                    <div class="form-check float-left">
-                      <input class="form-check-input" onChange={this.handleChange} type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-                        checked />
-                      <label class="form-check-label" for="exampleRadios1">
-                        HTD
-               </label>
-                    </div>
-                    <div class="form-check float-left">
-                      <input class="form-check-input" onChange={this.handleChange} type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                      <label class="form-check-label" for="exampleRadios2">
-                        ELF
-               </label>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6 ty-font left user-input-wrp"><br />
-                    <div class="form-check ">
-                      <input class="form-check-input" onChange={this.handleChange} type="checkbox" value="" id="defaultCheck1" />
-                      <label class="form-check-label" for="defaultCheck1">
-                        Online Training
-               </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" onChange={this.handleChange} type="checkbox" value="" id="defaultCheck1" />
-                      <label class="form-check-label" for="defaultCheck1">
-                        Offline Training
-               </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="float-right ty-create-button">
-                  <button type="submit" class="btn btn-outline-primary ty-font" onClick={this.submituserRegistrationForm}>Create</button></div>
-                <div class="float-right ty-reset-button">
-                  <button type="reset" class="btn btn-outline-secondary ty-font">Reset</button></div>
-              </form>
-
             </div>
-          </div>
-        </div>
-      </div>
 
-
-
-
-          
-            </div>
 
         )
     }

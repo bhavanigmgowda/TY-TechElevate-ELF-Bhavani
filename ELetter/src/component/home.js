@@ -49,15 +49,15 @@ import { Thumbnail } from 'react-bootstrap';
    printPreview=()=>{
        window.print();
    }
-
-
-
+back(){
+ 
+this.props.history.push('/hr')
+this.props.backDataGet(this.state.show)
+}
   showWatermark=(data)=>{
-             
     this.setState({
       show:data
     },()=>{this.props.showWatermark(this.state.show)})
-    
   }
 
   logout=()=>{
@@ -67,6 +67,7 @@ import { Thumbnail } from 'react-bootstrap';
 
   render() {
     return (
+
       <div>
 
      {/*    <div>
@@ -142,10 +143,11 @@ import { Thumbnail } from 'react-bootstrap';
     </div>
     {this.props.buttonShow?<MailComponent/>:null}
     
-    {   this.props.buttonShow?<img onClick={this.printPreview} style={{ width: 38, cursor: 'pointer', borderRadius: '100px' }} src={printer} />:null}
+    {   this.props.buttonShow?<><img onClick={this.printPreview} style={{ width: 38, cursor: 'pointer', borderRadius: '100px' }} src={printer} /><button onClick={()=>{this.back()}}>edit</button></>:null}
     <div style={{marginTop: '-2px'}} class="nav-item nav-item avatar dropdown">
-   
+ 
               <div class="nav-link new-link">
+              
               <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="http://kartavyasadhana.in/assets/images/user.png" class="rounded-circle z-depth-0" alt="avatar image" />
                   </a>

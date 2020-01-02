@@ -36,12 +36,13 @@ export class InputHRLetter extends Component {
             validDate:''
         }
     }
-    
-    componentDidMount() {
+    componentDidMount(){
+        
+    }
+    validate=()=> {
 
         var that = this;
-        $(document).ready( ()=> {
-            $('#generate').click( (e) =>{
+  
                 debugger
                 console.log("inside CDM")
                 debugger;
@@ -123,8 +124,7 @@ export class InputHRLetter extends Component {
                  else {
                      return false;
                  }
-            });
-        });
+      
     }
 
     
@@ -202,152 +202,133 @@ export class InputHRLetter extends Component {
 
 
      }
-
+     getData(data){
+         console.log("data getaaaaaaaaaaaaaaaaaaaaaaa",data);
+     }
 
     pass = (event) => {
         event.preventDefault();
         console.log("data========", this.state)
-         
-        
-
         this.props.clicked(this.state)
        this.props.history.push('/hrLetter')
-
     }
-
     render() {
+      if(this.props.getDataOfLetter){
+        this.getData(this.props.getDataOfLetter);
+      }
         return (
             <div>
-                <Home buttonShow={false} />
-                <div >
-                    <div className="container-fluid mt-5">
-                        <div className="row">
-                            <div className="col-auto container mt-5 pb-5">
-                                <div style={{ width: '500px' }} className="card m-auto shadow-lg mt-5">
-                                    <div class="card-header" style={{ borderRadius: '0px !important', background: 'white' }} >
-                                        <h3 className="text-center black-text font-bold ">HR Letter</h3>
+                debugger
+                <Home buttonShow={false}  backDataGet={(data) =>console.log("dataaaaaaaaaaaa")}/>
+{console.log("aaaaaaaaaaaaaaaaaaaa",   this.props.getDataOfLetter)}
+                <div>
+                    <label for="title" class="ty-font heading col-lg-4 col-md-12 col-sm-12  col-12  offset-4 mt-5" style={{ left: "0px" }}>HR Letter</label>
+
+                    <div class="card container mt-5 mt-5" style={{width: "600px"}}>
+                        <div class="card-body col-lg-10 col-md-10">
+                            <form onSubmit={this.pass} >
+                                <div class="form-row mt-3">
+                                <div class="form-group col-md-6 ty-font user-input-wrp"><br />
+                                        <select class="form-control  inputText" id="input" name="traineetype" onChange={(event) => {
+                                            this.setState({
+                                                salute: event.target.value
+                                            })
+                                        }}
+                                            required>
+                                            <option selected value="Mr.">Mr.</option>
+                                            <option value="Ms.">Ms.</option>
+                                            <option value="Mrs.">Mrs.</option>
+                                        </select>
+                                        <div class="ty-errmsg ">
+                                            <div > </div>
+                                        </div>
                                     </div>
-                                    <div className="card-body ">
-                                        <form onSubmit={this.pass}>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="employeeName" onKeyPress={this.hideEmployeeName} onChange={(event) => {
+                                            this.setState({
+                                                employeeName: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Employee Name</span>
 
-                                            <div className="row">
-
-                                            <div className="col-md-3" style={{ paddingTop: '25px' }}>
-                                                    <select class="browser-default custom-select" autocomplete="off"  name="salutation" title="salutation" id="salutation" onChange={(event) => {
-                                                        this.setState({
-                                                            salute: event.target.value
-                                                        })
-                                                    }}>
-                                                        <option selected value="Mr.">Mr.</option>
-                                                        <option value="Ms.">Ms.</option>
-                                                        <option value="Mrs.">Mrs.</option>
-                                                    </select>
-                                                </div>
-                                                <div className="col-9">
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideEmployeeName}  label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
-                                                        this.setState({
-                                                            employeeName: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            <div className="row" style={{padding:0}}>
-                                               <div className="col-3 p-0" >
-                                               
-                                               </div>
-                                               <div className="col-9 p-0" style={{width:0}}>
-                                               {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill out Name field * </div> : null}
-                                               </div>
-                                           </div>
-
-                                            <div className="row">
-                                                <div className="col-6">
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideEmployeeId}  label="Employee Id" name="employeeId" id="employeeId" title="Employee Id" onChange={(event) => {
-                                                        this.setState({
-                                                            employeeId: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                                <div className="col-6">
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideDesignation}  label="Designation" name="designation" id="designation" title="Designation" onChange={(event) => {
-                                                        this.setState({
-                                                            designation: event.target.value
-                                                        })
-                                                    }} />
-                                                    </div>
-                                            </div>
-                                            <div className="row" style={{padding:0}}>
-                                               <div className="col-6 p-0" >
-                                               {this.state.showEmployeeId ? <div id="errordiv" className="container-fluid">Please fill out ID field * </div> : null}
-                                           
-                                               </div>
-                                               <div className="col-6 p-0" style={{width:0}}>
-                                               {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill Designation field * </div> : null}
-                                               </div>
-                                           </div>
-
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <MDBInput autocomplete="off"  type="date" onKeyPress={()=>{this.hideJoiningDate();this.hideInvaliddate()}}  onClick={()=>{this.hideJoiningDate();this.hideInvaliddate()}} label="Joining Date" title="Joining Date" name="Joining Date" id="joiningDate" onChange={(event) => {
-                                                        this.setState({
-                                                            joiningDate: event.target.value
-                                                        });this.hideJoiningDate();this.hideInvaliddate();
-                                                    }} />
-                                                </div>
-                                               
-                                            </div>
-                                            <div className="row" style={{padding:0}}>
-                                                   <div className="col-12 p-0">
-                                                   {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out JoiningDate field * </div> : null}
-                                               
-                                                   </div>
-                                                  
-                                            </div>
-
-
-                                            <div className="row">
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
-                                                       this.onChangeHeader(event)
-                                                    }} id="withLetterHead" />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
-</div>
-
-                                                </div>
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" className="custom-control-input" id="withWatermark" value={this.state.withWaterMark} onChange={(event) => {
-
-                                                              this.onCheckHandler(event)
-                                                       
-                                                    }} />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
-</div>
-
-                                                    </div>
-                                            </div>
-                                    
-                                            <div className=" input-group w-50 container-fluid">
-                                                <MDBBtn outline type="submit" id="generate" outline className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
-
-                                            </div>
-                                        </form>
+                                        <div class="ty-errmsg ">
+                                            {this.state.showEmployeeName ? <div >Please fill out Name field * </div> : null}
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="employeeId" onKeyPress={this.hideEmployeeId} onChange={(event) => {
+                                            this.setState({
+                                                employeeId: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Employee Id</span>
+
+                                        <div class="ty-errmsg ">
+                                        {this.state.showEmployeeId ? <div >Please fill out ID field * </div> : null}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="designation" onKeyPress={this.hideDesignation} onChange={(event) => {
+                                            this.setState({
+                                                designation: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Designation</span>
+                                        <div class="ty-errmsg ">
+                                        {this.state.showDesignation ? <div >Please fill out Designation field * </div> : null}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row  mt-3">
+                                    <div class="form-group col-md-12 ty-font user-input-wrp" style={{    marginLeft: "-2%"}}><br />
+                                        <input class="form-control inputText" onClick={()=>{this.hideJoiningDate();this.hideInvaliddate()}} onKeyPress={()=>{this.hideJoiningDate();this.hideInvaliddate()}}  id="joiningDate" name="joiningDate"
+                                            required
+                                            onChange={(event) => {
+                                                this.setState({
+                                                    joiningDate: event.target.value
+                                                });this.hideJoiningDate();this.hideInvaliddate();
+                                            }}
+                                            onFocus={(e) => e.target.type = 'date'}
+                                            onBlur={(e) => e.target.type = "text"}
+                                        />
+                                        <span class="floating-label">Joined Date</span>
+                                        <div class="ty-errmsg ">
+                                            {this.state.showJoiningDate ? <div >Please fill out Joining date field * </div> : null}
+                                            {this.state.showJoinInvalid ? <div >Joined Date must be equal or less than today's Date * </div> : null}
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            
+                                <hr style={{ width: "111%" }} />
+                                <div class="form-row mt-3">
+                                    <div className="col-6">
+                                        <div class="form-check" >
+                                            <input type="checkbox" value={this.state.withHeader} className="form-check-input" onChange={(event) => {
+                                                this.onChangeHeader(event)
+                                            }} id="withLetterHead" for="defaultCheck1" />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withLetterHead">With Letter Head</label>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-check">
+                                            <input type="checkbox" value={this.state.withWaterMark} className="form-check-input" id="withWatermark" onChange={(event) => {
+                                                this.onCheckHandler(event)
+                                            }} />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withWatermark">With WaterMark</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-right ty-create-button">
+                                    <button type="submit" class="btn btn-outline-primary ty-font" onClick={this.validate}>Create</button></div>
+                                <div class="float-right ty-reset-button">
+                                    <button type="reset" class="btn btn-outline-secondary ty-font">Reset</button></div>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-               
-
-
-   
-
-
-
             </div>
         )
     }

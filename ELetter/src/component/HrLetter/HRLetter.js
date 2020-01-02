@@ -42,6 +42,10 @@ export class HRLetter extends Component {
       default: return "th";
     }
   }
+  getData=()=>{
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaa");
+    this.props.backDataGet(this.state)
+  }
 
   render() {
 
@@ -58,21 +62,13 @@ export class HRLetter extends Component {
     if (this.props.empData) {
       return (
         <div>
-          {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />}
+          {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} backDataGet={()=>{this.getData()}} />}
           <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
             <div className="card-body pb-0 mt-5">
-
-
-
               <div>
-
                 {this.state.employee.withHeader ? <header className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
-
                   <img className="tyHeader" src={TyHeader}></img>
-
                 </header> : null}
-
-
                 {console.log("watermark------------------", this.props.waterMark)}
                 <p style={{ float: 'right' }}></p>
                 <p style={{ textAlign: 'justify' }}>&nbsp;</p>
