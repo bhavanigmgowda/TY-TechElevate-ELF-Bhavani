@@ -14,7 +14,8 @@ export class RelivingLetter extends Component {
 
         this.state = {
             employee: [],
-            waterMark:false
+            waterMark:false,
+            pix:false
             
 
         }
@@ -28,7 +29,36 @@ export class RelivingLetter extends Component {
         console.log("DDDDDDDDDDDDDDDDDDd", this.props.empData)
         console.log("data hr form  state ", this.state.employee);
 
+        let that=this;
+        var mediaQueryList = window.matchMedia('print');
+    
+        mediaQueryList.addListener(function(mql) {
+          if (mql.matches) {
+              console.log('before print dialog open');
+          } else {
+              console.log('after print dialog closed');
+              that.setState({
+                pix:false
+             })
+          }
+      });
+
     }
+
+    print=(data)=>{
+        debugger;
+       if(this.state.employee.withHeader){
+         this.setState({
+            pix:true
+         },()=>   setTimeout(() => {
+           window.print()
+         },550)
+         )
+       }else{
+         window.print()
+       }
+      
+     }
 
 
     nth = (d) => {
@@ -55,8 +85,8 @@ export class RelivingLetter extends Component {
         if (this.props.empData) {
             return (
                 <div>
-                    <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})} />
-                    <div className="card" id="AFourFirstPage">
+                    <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})} setHeader={(data)=>this.print()} />
+                    <div className="card" id="AFourPage" style={{ marginTop: '100px' }}>
                         <div className="card-body"> 
 
                         {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
@@ -87,21 +117,53 @@ export class RelivingLetter extends Component {
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>This is to inform that <strong>{this.state.employee.salute}</strong> <strong> {this.state.employee.employeeName}, </strong>was working with us from <strong> {toJoiningDate.getDate()}<sup>{this.nth(toJoiningDate.getDate())}</sup>&nbsp;{moment(toJoiningDate).format('MMMM YYYY')} </strong> to <strong> {moment(toReleiving).subtract(1, "days").format('DD')}<sup>{this.nth(toReleiving.getDate())}</sup>&nbsp;{moment(toReleiving).format('MMMM YYYY')}.</strong> {this.props.empData.gender.gender1} was relieved from {this.props.empData.gender.gender2} responsibilities on <strong> {(toReleiving.getDate())}<sup>{this.nth(toReleiving.getDate())}</sup>&nbsp;{moment(toReleiving).format('MMMM YYYY')}</strong> as <strong>  {this.state.employee.designation} </strong>During {this.props.empData.gender.gender2} stay, {this.props.empData.gender.gender2} character and conduct was good. During {this.props.empData.gender.gender3} tenure, {this.props.empData.gender.gender1} was hardworking and a good team member. We wish {this.props.empData.gender.gender3} success in all {this.props.empData.gender.gender2} future endeavors.</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>For Test Yantra Software Solutions (India) Pvt Ltd</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>Thanks & Regards</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>For <strong>Test Yantra Software Solutions (India) Pvt Ltd</strong></p>
                                 <br />
                                 <br />
                                 <br />
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, margin: 0, fontWeight: 'bolder' }}>Authorized Signatory</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p>
+                                {/* <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p> */}
                             </div>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                          
+                           
+                            {this.state.employee.withHeader?<div className="footer" style={{marginLeft: '-103px',marginTop: '45px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </div>:null}
 
                         </div>
                     </div>
 
-                    <div className="card" id="AFourPage">
+                    <div className="card" id="AFourFirstPage" style={{marginTop:'10px'}}>
                         <div className="card-body">
 
-                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+                        {this.state.employee.withHeader?  <header className="header" style={this.state.pix?{marginLeft: '-115px',marginTop: '-20px'}:{marginLeft: '-115px',marginTop: '-115px'}}>
                
                <img  style={{width: '1160px',
    height: '95px'}} src={TyHeader}></img>
@@ -128,22 +190,49 @@ export class RelivingLetter extends Component {
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>As per your resignation letter, we would like to inform you that, you are relieved from the roles and responsibilities of the company from <strong> {(toReleiving.getDate())}<sup>{this.nth(toReleiving.getDate())}</sup>&nbsp;{moment(toReleiving).format('MMMM YYYY')}.</strong> In this regard, we also wish to inform you that there are no commitments outstanding from either of us. We wish you success in all your future endeavors.</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>For Test Yantra Software Solutions (India) Pvt Ltd</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>Thanks & Regards</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>For <strong>Test Yantra Software Solutions (India) Pvt Ltd</strong></p>
                                 <br />
                                 <br />
                                 <br />
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, margin: 0, fontWeight: 'bolder' }}>Authorized Signatory</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p>
+                                {/* <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p> */}
                             </div>
-
-                        </div>
-                    </div>
-                    {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+                            
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                           
+                            
+                            {this.state.employee.withHeader?<footer className="footer" style={this.state.pix?{marginLeft: '-103px',marginTop: '-50px'}:{marginLeft: '-103px',marginTop: '-78px'}}>
                
                <img style={{width: '1160px',
    height: '95px'}} src={TyFooter}></img>
 
              </footer>:null}
+
+                        </div>
+                    </div>
+    
                 </div>
 
             )

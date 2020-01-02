@@ -277,12 +277,13 @@ export class InputCertificateLetter extends Component {
                                         </div>
 
                                     </div>
+                                    <div className="col-3">
                                     <div class="form-check" >
                                         <div className="custom-control custom-checkbox custom-control-inline col-6">
                                             <input type="checkbox" class="form-check-input" for="defaultCheck1" id="checkOthers" onClick={this.CheckValue} onChange={this.dataValue} />
                                             <label style={{ whiteSpace: 'nowrap' }} htmlFor="checkOthers" class="form-check-label" for="defaultCheck1">Other</label>
                                         </div>
-
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-row mt-3">

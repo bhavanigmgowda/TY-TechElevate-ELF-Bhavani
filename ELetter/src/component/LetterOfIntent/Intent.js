@@ -14,6 +14,7 @@ export  class Intent extends Component {
         this.state = {
             employee: [],
             waterMark:false,
+            pix:false,
         }
     }
 
@@ -23,6 +24,20 @@ export  class Intent extends Component {
         this.setState({
             employee: this.props.empData,
         })
+
+        let that=this;
+        var mediaQueryList = window.matchMedia('print');
+    
+        mediaQueryList.addListener(function(mql) {
+          if (mql.matches) {
+              console.log('before print dialog open');
+          } else {
+              console.log('after print dialog closed');
+              that.setState({
+                  pix:false
+             })
+          }
+      });
     }
 
     nth = (d) => {
@@ -36,8 +51,21 @@ export  class Intent extends Component {
         }
     }
 
-
-
+    print=(data)=>{
+        debugger;
+        console.log("pix value ",this.state.pix)
+        if(this.state.employee.withHeader){
+          this.setState({
+             pix:true
+          },()=>   setTimeout(() => {
+            window.print()
+          },550)
+          )
+        }else{
+          window.print()
+        }
+       
+      }
 
     render() {
 
@@ -61,9 +89,9 @@ export  class Intent extends Component {
 
 
                 <div>
-                    <Home buttonShow={true}  showWatermark={(data)=>this.setState({waterMark:data})} />
+                    <Home buttonShow={true}  showWatermark={(data)=>this.setState({waterMark:data})} setHeader={(data)=>this.print()} />
 
-                    <div class="card" id="AFourFirstPage">
+                    <div class="card" id="AFourPage" style={{ marginTop: '100px' }}>
                         <div class="card-body">
 
 
@@ -119,9 +147,17 @@ export  class Intent extends Component {
                                 <li>Under no circumstances will Intern leave the training program without first conferring with his / her supervisor.</li>
                                 <li>Intern hereby agrees that he/she, his/her assignees, heirs, guardians, and legal representatives, will not make a claim against Company or any of its affiliated organizations, or either of their officers or directors collectively or individually, or any of its employees, for the injury of death to Intern or damage to his/her property, however caused, arising from his/her participation in the training program.</li>
                             </ul>
-
+ 
 
                         </div>
+                        {/*this.state.pix?{marginLeft: '-83px',marginTop: '-27px'}:{marginLeft: '-103px',marginTop: '-27px'}}*/}
+                        {this.state.employee.withHeader?<div className="footer" style={{marginLeft: '-83px',marginTop: '-17px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </div>:null}
+                      
                     </div>
 
                     <div>
@@ -131,8 +167,8 @@ export  class Intent extends Component {
                     <div class="card" id="AFourPage">
                         <div class="card-body">
 
-                            
-                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+    
+                        {this.state.employee.withHeader?  <header className="header" style={this.state.pix?{marginLeft: '-115px',marginTop: '-13px'}:{marginLeft: '-115px',marginTop: '-115px'}}>
                
                <img  style={{width: '1160px',
    height: '95px'}} src={TyHeader}></img>
@@ -262,18 +298,25 @@ export  class Intent extends Component {
                                     <p style={{ textAlign: 'justify',margin:0 }}><strong>Employee Signature:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;Authorized Signatory </strong></p>
                                     <p style={{ textAlign: 'justify',margin:0 }}><strong>Date:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;Test Yantra Software Solutions Pvt Ltd</strong></p>
                                 </div>
-
+                               
                             </div>
 
                         </div>
-
-                    </div>
-                    {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        {this.state.employee.withHeader?<div className="footer" style={this.state.pix?{marginLeft: '-83px',marginTop: '-10px'}:{marginLeft: '-83px',marginTop: '-10px'}}>
                
                <img style={{width: '1160px',
    height: '95px'}} src={TyFooter}></img>
 
-             </footer>:null}
+             </div>:null}
+
+                    </div>
+      
 
                 </div>
 

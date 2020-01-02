@@ -22,11 +22,43 @@ export class ExitLetter extends Component {
         this.setState({
           employee: this.props.empData,
       })
+
+      let that=this;
+      var mediaQueryList = window.matchMedia('print');
+  
+      mediaQueryList.addListener(function(mql) {
+        if (mql.matches) {
+            console.log('before print dialog open');
+        } else {
+            console.log('after print dialog closed');
+            that.setState({
+                pix:false
+           })
+        }
+    });
         
         // console.log("data hr form ",this.props.history.location.state.employee);
          console.log("data hr form  state ",this.state.employee);
     
       }
+
+
+      print=(data)=>{
+        debugger;
+        console.log("pix value ",this.state.pix)
+        if(this.state.employee.withHeader){
+          this.setState({
+             pix:true
+          },()=>   setTimeout(() => {
+            window.print()
+          },550)
+          )
+        }else{
+          window.print()
+        }
+       
+      }
+
     
        nth = (d) => {
         if (d > 3 && d < 21)
@@ -53,8 +85,8 @@ export class ExitLetter extends Component {
         if (this.props.empData) {
         return (
             <div id="qwerty">
-                <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})}  />
-                <div className="card" id="AFourFirstPage">
+                <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})} setHeader={(data)=>this.print()}  />
+                <div className="card" id="AFourPage" style={{ marginTop: '100px' }}>
                     <div className="card-body">
 
 
@@ -101,15 +133,23 @@ export class ExitLetter extends Component {
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
+                              {/* his.state.pix?{marginLeft: '-103px',marginTop: '-15px'}:*/}
+                            {this.state.employee.withHeader?<div className="footer" style={this.state.pix?{marginLeft: '-103px',marginTop: '-36px'}:{marginLeft: '-103px',marginTop: '-40px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </div>:null}
                         </div>
 
                     </div>
                 </div>
-                <div className="card" id="AFourFirstPage">
+                <div className="card" id="AFourPage" style={{marginTop: '100px'}}>
 
                     <div className="card-body">
-
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+                     {/*{ margin-left: -115px;
+    margin-top: -13px}: */}
+              {this.state.employee.withHeader? <header className="header" style={this.state.pix?{marginLeft: '-115px',marginTop: '-19px'}:{marginLeft:'-115px',marginTop:'-115px'}}>
                
                <img  style={{width: '1160px',
    height: '95px'}} src={TyHeader}></img>
@@ -207,13 +247,19 @@ export class ExitLetter extends Component {
                                     <li style={{ textAlign: 'justify' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Exiting Employee agrees and acknowledges that Confidential Information was disclosed to the Exiting Employee during the course of his employment in trust and confidence solely for the performance of his assigned tasks at the Company and such confidential information includes various trade secrets and business practices of the Company which shall not be utilized or disclosed, in perpetuity, by the Exiting Employee to any third party whatsoever.</li>
                                 </ol>
                             </div>
+                            <br/>
+                            <br/>
+                            {/*this.state.pix?{marginLeft: '-103px',marginTop: '-36px'}: */}
+                            {this.state.employee.withHeader?<div className="footer" style={{marginLeft: '-103px',marginTop: '-40px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
 
-
-
+             </div>:null}
                         </div>
                     </div>
                 </div>
-                <div className="card" id="AFourFirstPage">
+                <div className="card" id="AFourPage">
                     <div className="card-body">
 
                     {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>

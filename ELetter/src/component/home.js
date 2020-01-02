@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, withRouter, Link } from 'react-router-d
 import { MDBBtn } from "mdbreact";
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import home3 from './Assests/home.png'
-import printer from './Assests/print.jpeg'
+import printer from './Assests/print.jpeg'  
 import Dropdown from './dropdown';
 import Axios from 'axios'
 import Example from './Example.js';
@@ -46,18 +46,30 @@ import { Thumbnail } from 'react-bootstrap';
   }
 
  
-   printPreview=()=>{
-       window.print();
+   printPreview=(containerid)=>{
+    /*  containerid = 'container-id'
+    if (document.selection) { // IE
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select();
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+   } 
+   window.print()*/
+   this.props.setHeader(true);
    }
-back(){
- 
-this.props.history.push('/hr')
-this.props.backDataGet(this.state.show)
-}
+
+
+
   showWatermark=(data)=>{
+             
     this.setState({
       show:data
     },()=>{this.props.showWatermark(this.state.show)})
+    
   }
 
   logout=()=>{
@@ -67,7 +79,6 @@ this.props.backDataGet(this.state.show)
 
   render() {
     return (
-
       <div>
 
      {/*    <div>
@@ -141,13 +152,13 @@ this.props.backDataGet(this.state.show)
     
     </ul>
     </div>
+    {this.props.buttonShow?<button onClick={()=>{window.history.back()}} className="btn btn-warning">Edit</button>:null}
     {this.props.buttonShow?<MailComponent/>:null}
     
-    {   this.props.buttonShow?<><img onClick={this.printPreview} style={{ width: 38, cursor: 'pointer', borderRadius: '100px' }} src={printer} /><button onClick={()=>{this.back()}}>edit</button></>:null}
+    {   this.props.buttonShow?<img onClick={this.printPreview} style={{ width: 38, cursor: 'pointer', borderRadius: '100px' }} src={printer} />:null}
     <div style={{marginTop: '-2px'}} class="nav-item nav-item avatar dropdown">
- 
+   
               <div class="nav-link new-link">
-              
               <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="http://kartavyasadhana.in/assets/images/user.png" class="rounded-circle z-depth-0" alt="avatar image" />
                   </a>

@@ -21,7 +21,37 @@ export class ConfirmationLetter extends Component {
         this.setState({
             employee: this.props.empData,
         })
+
+        let that=this;
+        var mediaQueryList = window.matchMedia('print');
+    
+        mediaQueryList.addListener(function(mql) {
+          if (mql.matches) {
+              console.log('before print dialog open');
+          } else {
+              console.log('after print dialog closed');
+              that.setState({
+                  pix:false
+             })
+          }
+      });
     }
+
+    print=(data)=>{
+        debugger;
+        console.log("pix value ",this.state.pix)
+        if(this.state.employee.withHeader){
+          this.setState({
+             pix:true
+          },()=>   setTimeout(() => {
+            window.print()
+          },550)
+          )
+        }else{
+          window.print()
+        }
+       
+      }
 
 
 
@@ -35,6 +65,8 @@ export class ConfirmationLetter extends Component {
             default: return "th";
         }
     }
+
+
 
     render() {
 
@@ -50,13 +82,15 @@ export class ConfirmationLetter extends Component {
         if (this.props.empData) {
             return (
                 <div>
-                    <Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />
+                    <Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} setHeader={(data)=>this.print()} />
                     <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
                         <div className="card-body  pb-0 mt-5">
                             <div>
 
                                 {this.state.employee.withHeader ? <header className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
+
                                     <img className="tyHeader" src={TyHeader}></img>
+
                                 </header> : null}
 
 
@@ -91,12 +125,14 @@ export class ConfirmationLetter extends Component {
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 5 }}>All other terms and conditions of your employment remain unchanged.</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 5 }}>Please sign and return the duplicate copy of this letter for our records.</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 5, margin: 0 }}>Sincerely Yours,</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }} align="JUSTIFY"><span >For Test Yantra Software Solutions (India) Pvt Ltd</span></p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }} align="JUSTIFY"><span >For <strong>Test Yantra Software Solutions (India) Pvt Ltd</strong></span></p>
                                 <br />
                                 <br />
                                 <br />
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, margin: 0 }}><strong>Authorized Signatory</strong></p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}><span ><strong  >(Human Resources)</strong></span></p>
+                                {/* <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}><span ><strong  >(Human Resources)</strong></span></p> */}
+                                <br />
+                                <br />
                                 <br />
                                 <br />
                                 <br />

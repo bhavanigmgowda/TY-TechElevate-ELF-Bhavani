@@ -21,7 +21,38 @@ export class DepuationLetter extends Component {
       employee: this.props.empData,
     })
 
+    let that=this;
+    var mediaQueryList = window.matchMedia('print');
+
+    mediaQueryList.addListener(function(mql) {
+      if (mql.matches) {
+          console.log('before print dialog open');
+      } else {
+          console.log('after print dialog closed');
+          that.setState({
+              pix:false
+         })
+      }
+  });
+
   }
+
+  print=(data)=>{
+    debugger;
+    console.log("pix value ",this.state.pix)
+    if(this.state.employee.withHeader){
+      this.setState({
+         pix:true
+      },()=>   setTimeout(() => {
+        window.print()
+      },550)
+      )
+    }else{
+      window.print()
+    }
+   
+  }
+
 
   nth = (d) => {
     if (d > 3 && d < 21)
@@ -46,7 +77,7 @@ export class DepuationLetter extends Component {
     if (this.props.empData) {
       return (
         <div>
-          <Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />
+          <Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} setHeader={(data)=>this.print()} />
 
           <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
             <div className="card-body pb-0 mt-5">
@@ -93,7 +124,8 @@ export class DepuationLetter extends Component {
                 <br />
                 <br />
                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, margin: 0, fontWeight: 'bolder' }}>Authorized Signatory</p>
-                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p>
+                {/* <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p> */}
+                <br />
               </div>
             </div>
             {this.state.employee.withHeader ? <div className="footer" style={{ marginLeft: '-141px', marginTop: '365px' }}>
