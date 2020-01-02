@@ -275,7 +275,6 @@ export class InputCertificateLetter extends Component {
                                             }} />
                                             <label style={{ whiteSpace: 'nowrap' }} htmlFor="degree" class="form-check-label" for="defaultCheck1">Degree</label>
                                         </div>
-
                                     </div>
                                     <div className="col-3">
                                     <div class="form-check" >

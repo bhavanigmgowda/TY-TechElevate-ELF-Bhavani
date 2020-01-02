@@ -6,6 +6,7 @@ import { MDBBtn } from "mdbreact";
 import '../Login/Login.css'
 import SimpleNavBar from '../Navbar/SimpleNavBar';
 import data from '../data.json'
+import home, { Home } from '../home';
 
 
 
@@ -20,10 +21,6 @@ export class Login extends Component {
         }
         
     }
-
-
-
-
     homepage = (event) => {
         event.preventDefault();
 
@@ -43,47 +40,47 @@ export class Login extends Component {
                 this.props.history.push('/cards')
                 break;
                 }
-            
-
         }
         if(bol==false){
         alert("invalid cridentials");
         }
-      
     }
 
     render() {
         return (
             <div>
                 <SimpleNavBar/>
-                <div  className="Logincenter">
-                    <div className="container-fluid mt-5">
-                        <div className="row">
-                            <div className="col-auto container-container-fluid mt-5 pb-5">
-                                <div style={{width:'400px'}} className="card m-auto shadow-lg mt-5">
-                                    <div class="card-header" style={{ borderRadius: '0px !important',background:'white' }} >
-                                        <h3 className="text-center black-text font-bold ">Login</h3>
+                <div>
+                    <label for="title" class="ty-font heading col-lg-4 col-md-12 col-sm-12  col-12  offset-4 mt-5" style={{ left: "0px" }}>Login</label>
+
+                    <div class="card container mt-5 mt-5" style={{width: "600px"}}>                        <div class="card-body col-lg-10 col-md-10">
+                            <form action="" method="post" onSubmit={this.pass} >
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-12 ty-font user-input-wrp"> <br />
+                                        <input type="text" id="email" class="form-control  inputText"  onChange={(event) => {
+                                            this.setState({
+                                                email: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Email</span>
+
+                                        
                                     </div>
-                                    <div className="card-body ">
-                                       <form onSubmit={this.homepage}>
-
-                                    <MDBInput autocomplete="off" required label="Email" outline size="lg" type="email" id="email" name="email" onChange={(event) => {
-                                                        this.setState({
-                                                            email: event.target.value
-                                                        })
-                                                    }}/>
-                                    <MDBInput  autocomplete="off" required label="Password" outline size="lg" type="password" id="password" name="password" onChange={(event) => {
-                                                        this.setState({
-                                                            password: event.target.value
-                                                        })
-                                                    }}/>
-                                    <MDBBtn outline style={{float:'right'}} color="primary" type="submit">Login</MDBBtn>
-
-                                    </form>
+                                    <div class="form-group col-md-12 ty-font user-input-wrp"> <br />
+                                        <input type="password" id="password" class="form-control  inputText" onChange={(event) => {
+                                            this.setState({
+                                                password: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Password</span>
+                                       
                                     </div>
-
                                 </div>
-                            </div>
+
+                                <div class="float-right ty-create-button">
+                                    <button type="submit" class="btn btn-outline-primary ty-font" >Login</button></div>
+                              </form>
+
                         </div>
                     </div>
                 </div>

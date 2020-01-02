@@ -145,8 +145,7 @@ export class InputDesignationLetter extends Component {
     render() {
         return (
             <div>
-                <NavBar buttonShow={false} />
-
+                <Home buttonShow={false} />
                 <div>
                     <label for="title" class="ty-font heading col-lg-4 col-md-12 col-sm-12  col-12  offset-4 mt-5" style={{ left: "0px" }}>Designation Change Letter</label>
                     <div class="card container mt-5 mt-5" style={{width: "600px"}}>                    
