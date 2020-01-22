@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './NavBar';
-
+import './FormCss.css'
 
 class FormAppClass extends React.Component {
   constructor() {
@@ -171,7 +171,7 @@ class FormAppClass extends React.Component {
       <div>
         <NavBar/>
         <div>
-          <label for="title" class="ty-font heading col-lg-4 col-md-6 col-sm-6  col-6  offset-4 mt-5">Create Task</label>
+          <label for="title" class="ty-font heading col-lg-4 col-md-6 col-sm-6  col-6  offset-4 mt-5" style={{left:"0px"}}>Create Task</label>
 
           <div class="card col-lg-4 col-md-6 col-sm-6  col-6  offset-4 mt-5">
             <div class="card-body col-lg-10 col-md-10">

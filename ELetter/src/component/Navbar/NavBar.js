@@ -158,9 +158,9 @@ class NavBar extends Component {
           </a>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <ul className="nav-profile nav-area ">
-              <li ><a href="JavaScript:void(0);" style={{marginTop: "-60px",fontSize: "14px",paddingBottom: "43px",    width:" max-content"}}>Profile Setting </a>
+              <li ><Link href="JavaScript:void(0);" style={{marginTop: "-60px",fontSize: "14px",paddingBottom: "43px",    width:" max-content"}}>Profile Setting </Link>
               </li>
-              <li ><a href="JavaScript:void(0);" style={{marginTop: "-60px",fontSize: "14px",paddingBottom: "43px"}}> Logout</a>
+              <li ><Link  style={{marginTop: "-60px",fontSize: "14px",paddingBottom: "43px"}} onClick={this.logout}> Logout</Link>
                 <div className="sub-nav">
                 </div>
               </li>

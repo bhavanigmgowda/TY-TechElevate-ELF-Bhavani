@@ -5,8 +5,6 @@ import { withRouter } from 'react-router-dom';
 import TyHeader from '../Assests/TYHeader.PNG';
 import TyFooter from '../Assests/TYFooter.PNG'
 import moment from 'moment'
-import { NavBar } from '../Navbar/NavBar';
-import SimpleNavBar from '../Navbar/SimpleNavBar';
 
 export class CertificateLetter extends Component {
 
@@ -24,6 +22,21 @@ export class CertificateLetter extends Component {
     this.setState({
       employee: this.props.empData,
     })
+
+    let that=this;
+    var mediaQueryList = window.matchMedia('print');
+
+    mediaQueryList.addListener(function(mql) {
+      if (mql.matches) {
+          console.log('before print dialog open');
+      } else {
+          console.log('after print dialog closed');
+          that.setState({
+              pix:false
+         })
+      }
+  });
+
   }
 
   nth = (d) => {
@@ -35,6 +48,22 @@ export class CertificateLetter extends Component {
       case 3: return "rd";
       default: return "th";
     }
+  }
+
+  print=(data)=>{
+    debugger;
+    console.log("pix value ",this.state.pix)
+    if(this.state.employee.withHeader){
+      this.setState({
+         pix:true
+      },()=>   setTimeout(() => {
+        window.print()
+      },550)
+      )
+    }else{
+      window.print()
+    }
+   
   }
 
 
@@ -49,7 +78,7 @@ export class CertificateLetter extends Component {
     if (this.props.empData) {
       return (
         <div>
-          <SimpleNavBar buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />
+          <Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} setHeader={(data)=>this.print()} />
           <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
             <div className="card-body pb-0 mt-5">
 
@@ -113,11 +142,14 @@ export class CertificateLetter extends Component {
                 <br/>
                 <br/>
                 <br/>
+                <br/>
+                <br/>
+                <br/>
               </div>
 
 
             </div>
-            {this.state.employee.withHeader ? <div className="footer" style={{ marginLeft: '-141px', marginTop: '37px' }}>
+            {this.state.employee.withHeader ? <div className="footer" style={{ marginLeft: '-141px', marginTop: '-38px' }}>
 
               <img className="tyfooter" style={{marginLeft: '48px'}} src={TyFooter}></img>
 

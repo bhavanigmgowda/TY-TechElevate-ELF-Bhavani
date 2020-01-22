@@ -809,8 +809,8 @@ export class Offer2 extends Component {
                             <br />
                             <br />
                             <div>
-                                <p className="western" style={{ float: 'left', width: 300, textAlign: 'left', margin: 0 }}>Authorised Signatory&nbsp;&nbsp;&nbsp;</p > <p style={{ float: 'right', width: 390 }}> Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                <br /> <p className="western" style={{ width: 200, textAlign: 'left', margin: 0 }}>(Human Resources)&nbsp;&nbsp;&nbsp;</p >
+                                <p className="western" style={{ float: 'left', width: 300, textAlign: 'left', margin: 0 }}>Authorised Signatory&nbsp;&nbsp;&nbsp;</p > <p style={{ float: 'right', width: 390 }}> Name: {this.state.employee.name}</p>
+                                <br /> <p className="western" style={{ width: 200, textAlign: 'left', margin: 0 }}>&nbsp;&nbsp;&nbsp;</p >
                             </div>
                         </div>
                     </div>

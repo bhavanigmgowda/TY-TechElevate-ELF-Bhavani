@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Modal, Button, Card } from 'react-bootstrap'
 import Axios from 'axios';
 import Footer from '../navBar/footer'
-import { Link } from 'react-router-dom';
+import { Link ,withRouter} from 'react-router-dom';
 
 import './myprofile.css'
 import { Architectproject, SideNavBar } from '../Architect/SideData';
@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { PropagateLoader } from 'react-spinners';
 
 
-export default class MyProfile1 extends Component {
+ class MyProfile1 extends Component {
 
     constructor(props) {
         super(props);
@@ -94,7 +94,7 @@ export default class MyProfile1 extends Component {
     NotifyServerOffline = () => {
         if (!toast.isActive(this.toastId)) {
             this.toastId = toast.error(<center> Server Did Not Respond</center>, {
-                position: "top-center", autoClose: 7000,
+                position: "top-center", autoClose: false,
             });
         }
     }
@@ -102,7 +102,7 @@ export default class MyProfile1 extends Component {
     NotifyUpdateFailed = () => {
         if (!toast.isActive(this.toastId)) {
             this.toastId = toast.error(<center>Update Failed Server Did Not Respond</center>, {
-                position: "top-center", autoClose: 7000,
+                position: "top-center", autoClose: false,
             });
         }
     }
@@ -145,7 +145,12 @@ export default class MyProfile1 extends Component {
             });
         }
     }
-
+    homepage(e) {
+        e.preventDefault();
+        localStorage.removeItem('groupId');
+        localStorage.removeItem('projectName');
+        this.props.history.push('/homePage')
+    }
     render() {
         let cardStyle = {
             boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
@@ -167,7 +172,7 @@ export default class MyProfile1 extends Component {
                             <div className="row">
                                 <div className="col-md-10 offset-1 " >
                                     <div id="content-wrap" class="container-fluid ">
-                                        {localStorage.getItem('groupId') ? <div className="projectName" style={{ margin: "2%" }}><Link style={{ color: 'black' }} onClick={() => { this.props.history.push('/homePage') }} className="dark">Project</Link>&nbsp;/&nbsp;
+                                        {localStorage.getItem('groupId') ? <div className="projectName" style={{ margin: "2%" }}><Link style={{ color: 'black' }} onClick={(e) => { this.homepage(e) }} className="dark">Project</Link>&nbsp;/&nbsp;
                                                             <Link style={{ color: 'black' }} to='/taskPage'>{localStorage.getItem("projectName")}</Link></div> : null}
 
                                         <div style={{ textAlign: 'center' }}>
@@ -216,14 +221,7 @@ export default class MyProfile1 extends Component {
                                                             <input type="text" title="Change Name" onChange={(event) => { this.setState({ employeeName: event.target.value }) }}
                                                                 value={this.state.employeeName} className="form-control" placeholder="Employee Name" />
                                                         </div>
-                                                        <label>Email:</label>
-                                                        <div className="input-group mb-3">
-                                                            <div className="input-group-prepend ">
-                                                                <label className="input-group-text"><i className="fas fa-at" /></label>
-                                                            </div>
-                                                            <input type="text" title="Change Email" onChange={(event) => { this.setState({ email: event.target.value }) }}
-                                                                value={this.state.email} className="form-control" placeholder="Email" />
-                                                        </div>
+                                                    
                                                         <label>Designation:</label>
                                                         <div className="input-group mb-3">
                                                             <div className="input-group-prepend ">
@@ -252,3 +250,4 @@ export default class MyProfile1 extends Component {
         )
     } // End of render()
 }
+export default withRouter(MyProfile1)

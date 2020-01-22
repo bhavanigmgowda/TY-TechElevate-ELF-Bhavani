@@ -5,6 +5,7 @@ import TyHeader from '../Assests/TYHeader.PNG';
 import TyFooter from '../Assests/TYFooter.PNG';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
+import './Trainingcommit.css'
  class TrainingCommit extends Component {
 
     constructor(props) {
@@ -13,6 +14,7 @@ import moment from 'moment';
         this.state={
            employee:[ ],
            waterMark:false,
+           pix : false
         }
     
       }
@@ -21,7 +23,22 @@ import moment from 'moment';
     
         this.setState({
           employee: this.props.empData,
+  
       })
+
+      let that=this;
+      var mediaQueryList = window.matchMedia('print');
+  
+      mediaQueryList.addListener(function(mql) {
+        if (mql.matches) {
+            console.log('before print dialog open');
+        } else {
+            console.log('after print dialog closed');
+            that.setState({
+                pix:false
+           })
+        }
+    });
         
         // console.log("data hr form ",this.props.history.location.state.employee);
          console.log("data hr form  state ",this.state.employee);
@@ -39,6 +56,22 @@ import moment from 'moment';
         }
       }
 
+      print=(data)=>{
+       debugger;
+       console.log("pix value ",this.state.pix)
+       if(this.state.employee.withHeader){
+         this.setState({
+            pix:true
+         },()=>   setTimeout(() => {
+           window.print()
+         },550)
+         )
+       }else{
+         window.print()
+       }
+      
+     }
+
 
     render() {
 
@@ -52,17 +85,17 @@ import moment from 'moment';
         }
         if (this.props.empData) {
         return (
-            <div>
-                <Home buttonShow={true}  showWatermark={(data)=>this.setState({waterMark:data})}/>
-                <div className="card" id="AFourFirstPage">
+            <div id='container-id'>
+                <Home buttonShow={true}  showWatermark={(data)=>this.setState({waterMark:data})} setHeader={(data)=>this.print()} />
+                <div className="card"  style={{ marginTop: '145px' }} id="AFourFirstPage">
                         <div className="card-body">
 
-                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
+<img className="tyHeader" src={TyHeader}></img>
+
+</div> : null}
+
 
                             
              {this.state.employee.withWaterMark? <div  className="waterMark">
@@ -84,27 +117,72 @@ import moment from 'moment';
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }} align="JUSTIFY"><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}>This is to certify that </span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong> {this.state.employee.salute} {this.state.employee.employeeName} </strong></span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}>is an employee in this organization. {this.props.empData.gender.gender1} is presently holding the post as </span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong>{this.state.employee.designaton}</strong></span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}>. {this.props.empData.gender.gender1} joined this organization on </span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong>{toJoiningDate.getDate()}<sup>{this.nth(toJoiningDate.getDate())}</sup>&nbsp;{moment(toJoiningDate).format('MMMM YYYY')}</strong></span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}>.</span></span></p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }} align="JUSTIFY"><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}>Further this organization has </span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong>No Objection</strong></span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}> for </span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong>{this.state.employee.salute} {this.state.employee.employeeName} </strong></span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}>joining to</span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong> {this.state.employee.courseName} Course</strong></span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}> at </span></span><span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong>{this.state.employee.branchName},</strong></span></span> <span style={{ color: '#000000' }}><span style={{ fontSize: 'large' }}><strong>{this.state.employee.branchLocation} Branch. </strong></span></span></p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }}>&nbsp;</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }}>Thanks & Regards</p>
+
                                 <p style={{ textAlign: 'left', paddingLeft: 20, paddingRight: 20 }}><span style={{ color: '#000000' }}>For </span><span style={{ color: '#000000' }}><strong>Test Yantra Software Solutions (India ) Pvt Ltd</strong></span></p>
                                 <br />
                                 <br />
                                 <br />
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, margin: 0, fontWeight: 'bolder' }}>Authorized Signatory</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p>
+                                {/* <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p> */}
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />                                
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />                                
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                {this.state.employee.withHeader?<div className="footer" style={{marginLeft: '-103px',marginTop: '-19px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </div>:null}
+
+
+
                             </div>
 
                         </div>
                     </div>
-
+                    <br />
+                             
+                                <br />
+                                <br />
+                                <br />
+                               
+                              
                 
-                <div className="card" id="AFourFirstPage">
-                    <div className="card-body">
+                <div className="card" id="AFourPage">
+                    <div className="card-body pb-0"> 
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                    {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-53px' }}>
 
-             </header>:null}
+<img className="tyHeader" src={TyHeader}></img>
+
+</div> : null}
+
                         
              {this.state.employee.withWaterMark? <div  className="waterMark">
                 <span style={{color:'#263248',fontSize: '91px',
@@ -147,14 +225,26 @@ import moment from 'moment';
                                 </ol>
                             </ol>
                         </div>
+                        {this.state.employee.withHeader?<div className="footer" style={this.state.pix?{marginLeft: '-103px',marginTop: '170px'}:{marginLeft: '-103px',marginTop: '158px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
 
+             </div>:null}
                     </div>
                 </div>
+
+                <br />
+                                <br />
+                                <br />
+                         
+                             
+                               
 
                 <div className="card" id="AFourPage">
                     <div className="card-body" >
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+                    {this.state.employee.withHeader?  <header className="header" style={this.state.pix?{marginLeft: '-115px',marginTop: '-95px'}:{marginLeft: '-115px',marginTop: '-115px'}}>
                
                <img  style={{width: '1160px',
    height: '95px'}} src={TyHeader}></img>
@@ -188,15 +278,24 @@ import moment from 'moment';
                             <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                         </div>
                     </div>
-                </div>
-                {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                  
+                    {this.state.employee.withHeader?<div className="footer" style={this.state.pix?{marginLeft: '-83px',marginTop: '208px'}:{marginLeft: '-83px',marginTop: '195px'}}>
                
                <img style={{width: '1160px',
    height: '95px'}} src={TyFooter}></img>
 
-             </footer>:null}
+             </div>:null}
+                   
+                </div>
+               
             </div>
-
+      
         )
     } else {
         return (<h1></h1>)

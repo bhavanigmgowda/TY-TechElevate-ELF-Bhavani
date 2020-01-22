@@ -73,7 +73,7 @@ export class InputDepuationLetter extends Component {
 
 
 
-    componentDidMount() {
+    validate=()=> {
 
             const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -97,8 +97,7 @@ export class InputDepuationLetter extends Component {
         })
 
         var that = this;
-        $(document).ready(function () {
-            $('#generate').click(function (e) {
+    
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let clientName = (document.getElementById("clientName").value).trim();
                 let clientLocation = (document.getElementById("clientLocation").value).trim();
@@ -150,8 +149,7 @@ export class InputDepuationLetter extends Component {
                 else {
                     return false;
                 }
-            });
-        });
+       
     }
     pass = (event) => {
         event.preventDefault();
@@ -208,121 +206,128 @@ export class InputDepuationLetter extends Component {
         return (
             <div>
                 <Home buttonShow={false} />
-                <div >
-                    <div className="container-fluid mt-5">
-                        <div className="row">
-                            <div className="col-auto container mt-5 pb-5">
-                                <div style={{ width: '500px' }} className="card m-auto shadow-lg mt-5">
-                                    <div class="card-header" style={{ borderRadius: '0px !important', background: 'white' }} >
-                                        <h3 className="text-center black-text font-bold ">Depuation Letter</h3>
+                <div>
+                    <label for="title" class="ty-font heading col-lg-4 col-md-12 col-sm-12  col-12  offset-4 mt-5" style={{ left: "0px" }}>Depuation Letter</label>
+
+                    <div class="card container mt-5 mt-5" style={{width: "600px"}}>                    
+                        <div class="card-body col-lg-10 col-md-10">
+                            <form onSubmit={this.pass} >
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="employeeName" onKeyPress={this.hideEmployeeName} onChange={(event) => {
+                                            this.setState({
+                                                employeeName: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Employee Name</span>
+
+                                        <div class="ty-errmsg ">
+                                            {this.state.showEmployeeName ? <div > Please fill out employee Name field * </div> : null}
+                                        </div>
                                     </div>
-                                    <div className="card-body ">
-                                        <form onSubmit={this.pass}>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
-                                                        this.setState({
-                                                            employeeName: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid p-0">Please fill Employee Name field * </div> : null}
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideClientName} type="text" label="Client Name" title="Client Name" name="clientName" id="clientName" onChange={(event) => {
-                                                        this.setState({
-                                                            clientName: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            {this.state.showClientName ? <div id="errordiv" className="container-fluid p-0">Please fill Client Name field * </div> : null}
-                                            <div className="row">
-                                                <div class="col-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideClientLocation} type="text" label="Client Location" title="Client Name" name="clientLocation" id="clientLocation" onChange={(event) => {
-                                                        this.setState({
-                                                            clientLocation: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                                <div class="col-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideContactPerson} type="text" label="Contact Person" title="Contact Person" name="contactPerson" id="contactPerson" onChange={(event) => {
-                                                        this.setState({
-                                                            contactPerson: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-
-                                            <div className="row">
-                                                <div className="col-6">
-                                                    {this.state.showClientLocation ? <div id="errordiv" className="container-fluid p-0">Please fill out Client Location field * </div> : null}
-                                                </div>
-                                                <div className="col-6">
-                                                    {this.state.showcontactPerson ? <div id="errordiv" className="container-fluid p-0">Please fill out Contact Person field * </div> : null}
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={()=>{this.hideReportingDate();this.hideInvalidDate()}} onClick={()=>{this.hideReportingDate();this.hideInvalidDate()}} type="date" label="Reporting Date" title="Reporting Date" name="reportingDate" id="reportingDate" onChange={(event) => {
-                                                        this.setState({
-                                                            reportingDate: event.target.value
-                                                        });this.hideReportingDate();this.hideInvalidDate();
-                                                    }} />
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideReportingTime} onClick={this.hideReportingTime} type="time" label="Reporting Time" title="Reporting Time" name="reportingTime" id="reportingTime" onChange={(event) => {
-                                                        this.setState({
-                                                            reportingTime: event.target.value
-                                                        });this.hideReportingTime();
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            <div className="row" style={{ padding: 0 }}>
-                                                <div className="col-6 p-0" >
-                                                    {this.state.showReportingDate ? <div id="errordiv" className="container-fluid">Please fill out Reporting Date field * </div> : null}
-                                                    {this.state.showInvalidDate ? <div id="errordiv" className="container-fluid">Reporting Date equal or greater than Today's date * </div> : null}
-
-                                                </div>
-                                                <div className="col-6 p-0" style={{ width: 0 }}>
-                                                    {this.state.showReportingTime ? <div id="errordiv" className="container-fluid">Please fill out Reporting Time field * </div> : null}
-                                                </div>
-                                            </div>
-                                           
-                                            <div className="row">
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
-                                                      this.onChangeHeader(event)
-                                                    }} id="withLetterHead" />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
-</div>
-
-                                                </div>
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" className="custom-control-input" value={this.state.withWaterMark} id="withWatermark"  onChange={(event) => {
-                                                        this.onCheckHandler(event)
-                                                    }} />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
-</div>
-
-                                                    </div>
-                                            </div>
- 
-
-                                            <div className=" input-group w-50 container-fluid">
-                                                <MDBBtn outline id='generate' type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
-                                            </div>
-                                        </form>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="clientName" onKeyPress={this.hideClientName} onChange={(event) => {
+                                            this.setState({
+                                                clientName: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Client Name</span>
+                                        <div class="ty-errmsg ">
+                                        {this.state.showClientName ? <div >Please fill Client Name field * </div> : null}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="clientLocation" onKeyPress={this.hideClientLocation} onChange={(event) => {
+                                            this.setState({
+                                                clientLocation: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Client Location</span>
+
+                                        <div class="ty-errmsg ">
+                                            {this.state.showClientLocation ? <div > Please fill out Client Location field * </div> : null}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="contactPerson" onKeyPress={this.hideContactPerson} onChange={(event) => {
+                                            this.setState({
+                                                contactPerson: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Contact Person</span>
+                                        <div class="ty-errmsg ">
+                                        {this.state.showcontactPerson ? <div >Please fill out Contact Person field * </div> : null}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"><br />
+
+                                        <input class="form-control inputText" onKeyPress={()=>{this.hideReportingDate();this.hideInvalidDate()}} onClick={()=>{this.hideReportingDate();this.hideInvalidDate()}} id="reportingDate" name="reportingDate"
+                                            required
+                                            onChange={(event) => {
+                                                this.setState({
+                                                    reportingDate: event.target.value
+                                                }); this.hideReportingDate();this.hideInvalidDate();
+                                            }}
+                                            onFocus={(e) => e.target.type = 'date'}
+                                            onBlur={(e) => e.target.type = "text"}
+                                        />
+                                        <span class="floating-label">Reporting Date</span>
+
+                                        <div class="ty-errmsg ">
+                                            {this.state.showReportingDate ? <div>Please fill out Reporting Date field * </div> : null}
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" id="reportingTime" class="form-control  inputText" onKeyPress={this.hideReportingTime} onClick={this.hideReportingTime} onChange={(event) => {
+                                            this.setState({
+                                                reportingTime: event.target.value
+                                            });this.hideReportingTime();
+                                        }}    onFocus={(e) => e.target.type = 'time'}
+                                        onBlur={(e) => e.target.type = "text"} required />
+                                        <span class="floating-label">Reporting Time</span>
+                                        <div class="ty-errmsg ">
+                                            {this.state.showReportingTime ? <div >Please fill out Reporting Time field * </div> : null}
+                                        </div>
+                                    </div>
+                                </div>
+                         
+                                <hr style={{ width: "111%" }} />
+                                <div class="form-row mt-3">
+                                    <div className="col-6">
+                                        <div class="form-check" >
+
+                                            <input type="checkbox" value={this.state.withHeader} className="form-check-input" onChange={(event) => {
+                                                this.onChangeHeader(event)
+                                            }} id="withLetterHead" for="defaultCheck1" />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withLetterHead">With Letter Head</label>
+                                        </div>
+
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-check">
+                                            <input type="checkbox" value={this.state.withWaterMark} className="form-check-input" id="withWatermark" onChange={(event) => {
+                                                this.onCheckHandler(event)
+                                            }} />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withWatermark">With WaterMark</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="float-right ty-create-button">
+                                    <button type="submit" class="btn btn-outline-primary ty-font" onClick={this.validate}>Create</button></div>
+                                <div class="float-right ty-reset-button">
+                                    <button type="reset" class="btn btn-outline-secondary ty-font">Reset</button></div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         )
     }

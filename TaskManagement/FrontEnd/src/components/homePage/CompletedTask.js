@@ -253,6 +253,12 @@ class completedTask extends Component {
         }
         return itemRows;
     }
+    homepage(e) {
+        e.preventDefault();
+        localStorage.removeItem('groupId');
+        localStorage.removeItem('projectName');
+        this.props.history.push('/homePage')
+    }
 
     render() {
         let allItemRows = [];
@@ -265,11 +271,11 @@ class completedTask extends Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="row offset-4">
-                            {localStorage.getItem('groupId')?<div className="projectName"  style={{    margin: "2%"}} ><Link style={{color:'black'}} onClick={()=>{this.props.history.push('/homePage')}} className="dark">Project</Link>&nbsp;/&nbsp;
+                        <div className="row ">
+                            {localStorage.getItem('groupId')?<div className="projectName"  style={{    margin: "2%"}} ><Link style={{color:'black'}} onClick={(e)=>{this.homepage(e)}} className="dark">Project</Link>&nbsp;/&nbsp;
                                                             <Link style={{color:'black'}} to='/taskPage'>{localStorage.getItem("projectName")}</Link></div>:null} 
                             
-                            <div className="card-body completed">
+                            <div className="card-body completed offset-3">
                          
                                 <Modal centered size="md" show={this.state.show} onHide={this.handleClose.bind(this)}  >
                                     <Modal.Header closeButton>

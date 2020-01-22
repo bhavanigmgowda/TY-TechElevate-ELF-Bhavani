@@ -17,7 +17,6 @@ import intern from './Assests/intern.png'
 import training from './Assests/training.png'
 import TrainingCommit from './Assests/TrainingCommit.png'
 import offerletter2 from './Assests/offerLetter2.png'
-import NavBar from './Navbar/NavBar';
 
 export default class Cards extends Component {
 
@@ -32,7 +31,7 @@ export default class Cards extends Component {
     render() {
         return (
             <div>
-                <NavBar />
+                <Home />
                 <div className="row " style={{ marginLeft: '255px', marginRight: '20px', marginTop: '40px' }}>
 
                     <Link to='/hr'>

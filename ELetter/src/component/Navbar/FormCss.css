@@ -12,7 +12,7 @@ display: none;
         width: 100% !important;
         outline: none;
         border: none;
-        border-bottom: 1px solid #777  !important ;
+        border-bottom: 1px solid #777 ;
         box-shadow: none !important;
     }
    
@@ -31,9 +31,8 @@ display: none;
 .ty-font.heading {
     position: relative;
     top: 60px;
-    font-size: 28px;
+    font-size: 176%;
     font-weight: bolder;
-    left: 640px;
 }
 
 .card.card-body.col-md-4.offset-4.mt-5 {
@@ -100,7 +99,7 @@ input, select {
     width: 100%;
     outline: none;
     border: none;
-    border-bottom: 1px solid #777 !important;
+    border-bottom: 1px solid #777;
     box-shadow: none !important;
 }
 

@@ -298,6 +298,12 @@ export class CreateTask extends Component {
     callBean(data) {
         console.log("project bean", data)
     }
+    homepage(e) {
+        e.preventDefault();
+        localStorage.removeItem('groupId');
+        localStorage.removeItem('projectName');
+        this.props.history.push('/homePage')
+    }
 
     render() {
         return (
@@ -307,7 +313,7 @@ export class CreateTask extends Component {
                     <div className="col-md-12">
                         <div className="row">
                             <br /><br />
-                            {localStorage.getItem('groupId') ? <div className="projectName" style={{ margin: "2%" }}><Link style={{ color: 'black' }} onClick={() => { this.props.history.push('/homePage') }} className="dark">Project</Link>&nbsp;/&nbsp;
+                            {localStorage.getItem('groupId') ? <div className="projectName" style={{ margin: "2%" }}><Link style={{ color: 'black' }} onClick={(e) => { this.homepage(e)}} className="dark">Project</Link>&nbsp;/&nbsp;
                                                             <Link style={{ color: 'black' }} to='/taskPage'>{localStorage.getItem("projectName")}</Link></div> : null}
 
                             <div id="container" className="col-auto container-fluid pb-5 " style={{ marginTop: "4%", marginRight: "41%" }}>
@@ -394,7 +400,7 @@ export class CreateTask extends Component {
                                                 }}>
                                                     <option selected disabled hidden>Choose Priority</option>
                                                     <option value="low">Low</option>
-                                                    <option value="Medium">Medium</option>
+                                                    <option value="medium">Medium</option>
                                                     <option value="high">High</option>
                                                     <option value="critical">Critical</option>
                                                 </select>

@@ -14,11 +14,11 @@ export class InputIncrementLetter extends Component {
             annualCompensationYear: '',
             salaryIncremented: '',
             incrementInEffectDate: '',
-            companyLocation:'',
-            designation:'',
+            companyLocation: '',
+            designation: '',
             date: '',
-            withWaterMark:false,
-            withHeader:false,
+            withWaterMark: false,
+            withHeader: false,
 
             // validation variable
             showEmployeeName: '',
@@ -26,39 +26,38 @@ export class InputIncrementLetter extends Component {
             showAnnualCompensationYear: '',
             showSalaryIncremented: '',
             showIncrementInEffectDate: '',
-            showCompanyLocation:'',
-            showDesignation:'',
+            showCompanyLocation: '',
+            showDesignation: '',
 
         }
     }
 
-    componentDidMount() {
+    validate=()=> {
 
         const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-      ];
+            "July", "August", "September", "October", "November", "December"
+        ];
 
 
-      const nth = (d)=> {
-        if (d > 3 && d < 21) return 'th';
-        switch (d % 10) {
-          case 1:  return "st";
-          case 2:  return "nd";
-          case 3:  return "rd";
-          default: return "th";
+        const nth = (d) => {
+            if (d > 3 && d < 21) return 'th';
+            switch (d % 10) {
+                case 1: return "st";
+                case 2: return "nd";
+                case 3: return "rd";
+                default: return "th";
+            }
         }
-      }
 
         let today = new Date();
-        let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
+        let currentdate = today.getDate() + nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
         this.setState({
-            date:  currentdate
+            date: currentdate
         })
 
-        
+
         var that = this;
-        $(document).ready(function () {
-            $('#genrate').click(function (e) {
+ 
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let designation = (document.getElementById("designation").value).trim();
                 let employeeId = (document.getElementById("employeeId").value).trim();
@@ -66,9 +65,6 @@ export class InputIncrementLetter extends Component {
                 let incrementInEffectDate = (document.getElementById("incrementInEffectDate").value).trim();
                 let companyLocation = (document.getElementById("companyLocation").value).trim();
                 let salaryIncrement = (document.getElementById("salaryIncrement").value).trim();
-
-               
-
                 if (salaryIncrement === "") {
                     that.setState({ showSalaryIncremented: true })
                 }
@@ -81,7 +77,6 @@ export class InputIncrementLetter extends Component {
                 if (employeeName === "") {
                     that.setState({ showEmployeeName: true })
                 }
-
                 if (incrementInEffectDate === "") {
                     that.setState({ showIncrementInEffectDate: true })
                 }
@@ -91,32 +86,24 @@ export class InputIncrementLetter extends Component {
                 if (employeeId === "") {
                     that.setState({ showEmployeeId: true })
                 }
-
-                if (salaryIncrement != "" && companyLocation != "" && employeeName != "" && incrementInEffectDate !== "" &&  annualCompensationYear!="" && employeeId!='' && designation!="" ) {
+                if (salaryIncrement != "" && companyLocation != "" && employeeName != "" && incrementInEffectDate !== "" && annualCompensationYear != "" && employeeId != '' && designation != "") {
                     console.log("True return")
                     return true;
-
                 }
                 else {
                     return false;
                 }
-            });
-        });
-
-
-
-
-    }
+      }
     pass = (event) => {
         event.preventDefault();
         console.log("data========", this.state)
 
-       this.props.clicked(this.state)
+        this.props.clicked(this.state)
         this.props.history.push('/IncrementLetter')
 
     }
 
-   
+
     hideEmployeeName = () => {
         this.setState({
             showEmployeeName: false
@@ -153,196 +140,184 @@ export class InputIncrementLetter extends Component {
         })
     }
 
-    onCheckHandler=(event)=>{
+    onCheckHandler = (event) => {
         debugger;
 
-         console.log("Checkbox value ==",event.target.value)
-       if(event.target.value=='false'){
-           this.setState({
-               withWaterMark:true
-           })
-           console.log("if  ==",this.state.withWaterMark)
-       }
-       else{
-           debugger;
-           this.setState({
-               withWaterMark: false
-           })
-           console.log("else  ==",this.state.withWaterMark)
+        console.log("Checkbox value ==", event.target.value)
+        if (event.target.value == 'false') {
+            this.setState({
+                withWaterMark: true
+            })
+            console.log("if  ==", this.state.withWaterMark)
+        }
+        else {
+            debugger;
+            this.setState({
+                withWaterMark: false
+            })
+            console.log("else  ==", this.state.withWaterMark)
 
-       }
+        }
     }
 
-    onChangeHeader=(event)=>{
+    onChangeHeader = (event) => {
 
         debugger;
 
-        console.log("Checkbox value ==",event.target.value)
-      if(event.target.value=='false'){
-          this.setState({
-              withHeader:true
-          })
-          console.log("if  ==",this.state.withHeader)
-      }
-      else{
-          debugger;
-          this.setState({
-              withHeader: false
-          })
-          console.log("else  ==",this.state.withHeader)
+        console.log("Checkbox value ==", event.target.value)
+        if (event.target.value == 'false') {
+            this.setState({
+                withHeader: true
+            })
+            console.log("if  ==", this.state.withHeader)
+        }
+        else {
+            debugger;
+            this.setState({
+                withHeader: false
+            })
+            console.log("else  ==", this.state.withHeader)
 
-      }
+        }
 
 
-     }
+    }
 
 
     render() {
         return (
             <div>
-                <Home buttonShow={false}/>
-                <div >
-                    <div className="container-fluid mt-5">
-                        <div className="row">
-                            <div className="col-auto container mt-5 pb-5">
-                                <div style={{ width: '500px' }} className="card m-auto shadow-lg mt-5">
-                                    <div class="card-header" style={{ borderRadius: '0px !important', background: 'white' }} >
-                                        <h3 className="text-center black-text font-bold ">Increment Letter</h3>
+                <Home buttonShow={false} />
+
+
+                <div>
+                    <label for="title" class="ty-font heading col-lg-4 col-md-12 col-sm-12  col-12  offset-4 mt-5" style={{ left: "0px" }}>Increment Letter</label>
+
+                    <div class="card container mt-5 mt-5" style={{width: "600px"}}>                    
+                        <div class="card-body col-lg-10 col-md-10">
+                            <form onSubmit={this.pass} >
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="employeeName" onKeyPress={this.hideEmployeeName} onChange={(event) => {
+                                            this.setState({
+                                                employeeName: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Employee Name</span>
+
+                                        <div class="ty-errmsg ">
+                                            {this.state.showEmployeeName ? <div > Please fill out employee Name field * </div> : null}
+                                        </div>
                                     </div>
-                                    <div className="card-body ">
-                                        <form onSubmit={this.pass}>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
-                                                        this.setState({
-                                                            employeeName: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeId}  label="Employee Id" className="w-100" name="employeeId" title="Employe Id" id="employeeId" onChange={(event) => {
-                                                        this.setState({
-                                                            employeeId: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            <div className="row" style={{padding:0}}>
-                                               <div className="col-6 p-0" >
-                                               {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill out Employee Name field * </div> : null}
-                                           
-                                           
-                                               </div>
-                                               <div className="col-6 p-0" style={{width:0}}>
-                                               {this.state.showEmployeeId ? <div id="errordiv" className="container-fluid">Please fill out Employee ID field * </div> : null}
-                                               </div>
-                                           </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideDesignation} label="Designation" type="text" name="designation" id="designation" title="Designation" onChange={(event) => {
-                                                        this.setState({
-                                                            designation: event.target.value
-                                                        })
-                                                    }} />
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCompanyLocation} label="Company Location" type="text" name="companyLocation" id="companyLocation" title="Company Location" onChange={(event) => {
-                                                        this.setState({
-                                                            companyLocation: event.target.value
-                                                        })
-                                                    }} />
-
-                                                </div>
-                                            </div>
-                                            <div className="row" style={{padding:0}}>
-                                               <div className="col-6 p-0" >
-                                               {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill out Designation field * </div> : null}
-                                           
-                                           
-                                               </div>
-                                               <div className="col-6 p-0" style={{width:0}}>
-                                               {this.state.showCompanyLocation ? <div id="errordiv" className="container-fluid">Please fill out Company Location field * </div> : null}
-                                               </div>
-                                           </div>
-
-                                            <div class="row">
-                                                <div class="col-6">
-                                                <MDBInput autocomplete="off" type="number" onKeyPress={this.hideSalaryIncremented} label="Salary Incremented" className="w-100" name="salaryIncremented" title="Salary Increment" id="salaryIncrement" onChange={(event) => {
-                                                        this.setState({
-                                                            salaryIncremented: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                                <div class="col-6">
-                                                <MDBInput autocomplete="off" onClick={this.hideIncrementInEffectDate} onKeyPress={this.hideIncrementInEffectDate} type="date" label="Increment In Effect Date" title="Increment In Effect Date" name="incrementInEffectDate" id="incrementInEffectDate" onChange={(event) => {
-                                                        this.setState({
-                                                            incrementInEffectDate: event.target.value
-                                                        });this.hideIncrementInEffectDate();
-                                                    }} />
-                                                </div>
-                                               
-                                            </div>
-                                            <div className="row" style={{padding:0}}>
-                                               <div className="col-6 p-0" >
-                                               {this.state.showSalaryIncremented ? <div id="errordiv" className="container-fluid">Please fill out salary Increment field * </div> : null}
-                                           
-                                           
-                                               </div>
-                                               <div className="col-6 p-0" style={{width:0}}>
-                                               {this.state.showIncrementInEffectDate ? <div id="errordiv" className="container-fluid">Please fill out Increment Effect Date field * </div> : null}
-                                               </div>
-                                           </div>
-                                            <div className="row">
-                                            <div class="col-12">
-                                                <MDBInput autocomplete="off" onKeyPress={this.hideAnnualCompensationYear}   type="number" label="Annual Compensation Year" title="Annual Compensation Year" name="annualCompensationYear" id="annualCompensationYear" onChange={(event) => {
-                                                        this.setState({
-                                                            annualCompensationYear: event.target.value
-                                                        })
-                                                    }} />
-
-                                                </div>
-                                               
-                                               
-                                            </div>
-                                            <div className="row" style={{padding:0}}>
-                                               <div className="col-6 p-0" >
-                                               {this.state.showAnnualCompensationYear ? <div id="errordiv" className="container-fluid">Please fill out Compensation Year field * </div> : null}
-                                               </div>
-                                               <div className="col-6 p-0" style={{width:0}}>
-                                               </div>
-                                           </div>
-
-                                           <div className="row">
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
-                                                      this.onChangeHeader(event)
-                                                    }} id="withLetterHead" />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
-</div>
-
-                                                </div>
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" className="custom-control-input" value={this.state.withWaterMark} id="withWatermark"  onChange={(event) => {
-                                                       this.onCheckHandler(event)
-                                                    }} />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
-</div>
-
-                                                    </div>
-                                            </div>
-
-
-                                            <div className=" input-group w-50 container-fluid">
-                                                <MDBBtn outline id="genrate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
-                                            </div>
-                                        </form>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="employeeId" onKeyPress={this.hideEmployeeId} onChange={(event) => {
+                                            this.setState({
+                                                employeeId: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Employe Id</span>
+                                        <div class="ty-errmsg ">
+                                            {this.state.showEmployeeId ? <div  >Please fill out ID field * </div> : null}
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
+                                <div class="form-row mt-3">
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="designation" onKeyPress={this.hideDesignation} onChange={(event) => {
+                                            this.setState({
+                                                designation: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Designation</span>
+                                        <div class="ty-errmsg ">
+                                            {this.state.showDesignation ? <div >Please fill out Designation field * </div> : null}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="text" class="form-control  inputText" id="companyLocation" onKeyPress={this.hideCompanyLocation} onChange={(event) => {
+                                            this.setState({
+                                                companyLocation: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Company Location</span>
+
+                                        <div class="ty-errmsg ">
+                                            {this.state.showCompanyLocation ? <div >Please fill out Company Location field * </div> : null}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-3">
+                                <div class="form-group col-md-6 ty-font user-input-wrp"> <br />
+                                        <input type="number" class="form-control  inputText" id="salaryIncrement" onKeyPress={this.hideSalaryIncremented} onChange={(event) => {
+                                            this.setState({
+                                                salaryIncremented: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Salary Increment</span>
+                                        <div class="ty-errmsg ">
+                                        {this.state.showSalaryIncremented ? <div >Please fill out salary Increment field * </div> : null}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 ty-font user-input-wrp"><br />
+
+                                        <input class="form-control inputText" onClick={this.hideIncrementInEffectDate} onKeyPress={this.hideIncrementInEffectDate} id="incrementInEffectDate" name="reportingDate"
+                                            required
+                                            onChange={(event) => {
+                                                this.setState({
+                                                    incrementInEffectDate: event.target.value
+                                                }); this.hideIncrementInEffectDate();
+                                            }}
+                                            onFocus={(e) => e.target.type = 'date'}
+                                            onBlur={(e) => e.target.type = "text"}
+                                        />
+                                        <span class="floating-label">Increment In Effect Date</span>
+
+                                        <div class="ty-errmsg ">
+                                        {this.state.showIncrementInEffectDate ? <div >Please fill out Increment Effect Date field * </div> : null}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-3">
+                                <div class="form-group col-md-12 ty-font user-input-wrp" style={{marginLeft:"-2%"}}> <br />
+                                        <input type="number" class="form-control  inputText" id="annualCompensationYear" onKeyPress={this.hideAnnualCompensationYear} onChange={(event) => {
+                                            this.setState({
+                                                annualCompensationYear: event.target.value
+                                            })
+                                        }} required />
+                                        <span class="floating-label">Annual Compensation Year</span>
+                                        <div class="ty-errmsg ">
+                                        {this.state.showAnnualCompensationYear ? <div >Please fill out Compensation Year field * </div> : null}
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                <hr style={{ width: "111%" }} />
+                                <div class="form-row mt-3">
+                                    <div className="col-6">
+                                        <div class="form-check" >
+
+                                            <input type="checkbox" value={this.state.withHeader} className="form-check-input" onChange={(event) => {
+                                                this.onChangeHeader(event)
+                                            }} id="withLetterHead" for="defaultCheck1" />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withLetterHead">With Letter Head</label>
+                                        </div>
+
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-check">
+                                            <input type="checkbox" value={this.state.withWaterMark} className="form-check-input" id="withWatermark" onChange={(event) => {
+                                                this.onCheckHandler(event)
+                                            }} />
+                                            <label style={{ whiteSpace: 'nowrap' }} className="form-check-label" htmlFor="withWatermark">With WaterMark</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-right ty-create-button">
+                                    <button type="submit" class="btn btn-outline-primary ty-font" onClick={this.validate}>Create</button></div>
+                                <div class="float-right ty-reset-button">
+                                    <button type="reset" class="btn btn-outline-secondary ty-font">Reset</button></div>
+                            </form>
                         </div>
                     </div>
                 </div>

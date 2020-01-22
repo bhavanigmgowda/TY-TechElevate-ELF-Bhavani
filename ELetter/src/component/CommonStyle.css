@@ -1,4 +1,4 @@
-p , td,strong,span,li{
+p , td,strong,li{
     font-size: 22px;
   
 }
@@ -57,7 +57,7 @@ body {
 
 @Page {
     size:auto;
-  margin-top: 0%;
+  margin-top: -8.2%;
   margin-bottom: 0mm;
   margin-left: 0mm;
   margin-right: 0mm;

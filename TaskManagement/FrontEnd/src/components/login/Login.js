@@ -68,7 +68,6 @@ export class Login extends Component {
 				this.props.clicked(this.state.userData.email)
 			}
 			else if (response.data.statusCode === 401) {
-				console.log("ghfgvgjgvgvgvgvgvgvgvgvgvgvgvgv")
 				this.NotifyInvalidCrediatial();
 			}
 			else if (response.data.statusCode === 501) {

@@ -30,6 +30,19 @@ export class HRLetter extends Component {
 
     console.log("data hr form  state ", this.state.employee);
 
+    let that=this;
+    var mediaQueryList = window.matchMedia('print');
+
+    mediaQueryList.addListener(function(mql) {
+      if (mql.matches) {
+          console.log('before print dialog open');
+      } else {
+          console.log('after print dialog closed');
+          that.setState({
+              pix:false
+         })
+      }
+  });
 
   }
 
@@ -41,6 +54,23 @@ export class HRLetter extends Component {
       case 3: return "rd";
       default: return "th";
     }
+  }
+
+
+  print=(data)=>{
+    debugger;
+    console.log("pix value ",this.state.pix)
+    if(this.state.employee.withHeader){
+      this.setState({
+         pix:true
+      },()=>   setTimeout(() => {
+        window.print()
+      },550)
+      )
+    }else{
+      window.print()
+    }
+   
   }
 
   render() {
@@ -58,11 +88,9 @@ export class HRLetter extends Component {
     if (this.props.empData) {
       return (
         <div>
-          {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />}
+          {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} setHeader={(data)=>this.print()} />}
           <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
             <div className="card-body pb-0 mt-5">
-
-
 
               <div>
 
@@ -95,12 +123,13 @@ export class HRLetter extends Component {
                   }}>TY</span>ANTRA</span>
                 </div> : null}
                 <p lang="en-IN" style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
-                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >For Test Yantra Software Solutions (India) Pvt Ltd</span></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >Thanks & Regards,</span></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >For <strong>Test Yantra Software Solutions (India) Pvt Ltd</strong></span></p>
                 <br />
                 <br />
                 <br />
                 <p style={{ textAlign: 'justify', paddingLeft: 20, margin: 0 }}><strong>Authorized Signatory</strong></p>
-                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}><span ><strong  >(Human Resources)</strong></span></p>
+                {/* <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}><span ><strong>(Human Resources)</strong></span></p> */}
                 <br />
                 <br />
                 <br />

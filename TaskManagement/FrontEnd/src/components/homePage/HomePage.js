@@ -338,6 +338,12 @@ close=(data)=>{
              */
         }
     }
+    homepage(e) {
+        e.preventDefault();
+        localStorage.removeItem('groupId');
+        localStorage.removeItem('projectName');
+        this.props.history.push('/homePage')
+    }
 
 
     render() {
@@ -404,7 +410,7 @@ close=(data)=>{
             <div className="col-md-12 ">
                 <div className="row">
                                <div class="col-md-8 col-sm-8 offset-1"><br/>
-                               {localStorage.getItem('groupId')?<div className="projectName"><Link style={{color:'black'}} onClick={()=>{this.props.history.push('/homePage')}} className="dark">Project</Link>&nbsp;/&nbsp;
+                               {localStorage.getItem('groupId')?<div className="projectName"><Link style={{color:'black'}}  onClick={(e)=>{this.homepage(e)}} className="dark">Project</Link>&nbsp;/&nbsp;
                                             <Link style={{color:'black'}} to='/taskPage'>{localStorage.getItem("projectName")}</Link></div>:null} 
                                  <br/>
                                <div class="row">
